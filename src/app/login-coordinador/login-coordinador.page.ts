@@ -75,7 +75,7 @@ export class LoginCoordinadorPage implements OnInit {
           } catch (error) {
              Swal.fire({
               title:'Error',
-              text:'No se pudo iniciar sesión el coordinador',
+              text:'No se pudo iniciar sesión con el coordinador!',
               icon:'error',
               cancelButtonText:'Intentar de Nuevo',
               scrollbarPadding:false,
