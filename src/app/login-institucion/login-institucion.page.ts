@@ -57,7 +57,7 @@ export class LoginInstitucionPage implements OnInit {
               console.log("✅ Usuario autenticado:",response)
                Swal.fire({
                 title:'¡Registro Exitoso!',
-                text:`Te has registrado Correctamente en la Institución ${response.Resultado.Nombres_Apellidos}`,
+                text:`Te has registrado Correctamente en la Institución ${response.Institucion.Nombres_Apellidos}`,
                 icon:'success',
                 confirmButtonText:'OK',
                 scrollbarPadding:false,
