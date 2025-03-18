@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/home" text="volver" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro del Coordinador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">registroCoordinador</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <form  [formGroup]=" registroForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombres y Apellidos</ion-label>
+      <ion-input formControlName="Nombres_Apellidos" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Nombres_Apellidos?.invalid && Nombres_Apellidos?.touched">
+      Nombres y Apellidos son obligatorios
+    </p>
+    <ion-item>
+      <ion-label position="floating">Profesión</ion-label>
+      <ion-input formControlName="Profesion" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Profesion?.invalid && Profesion?.touched">
+      La profesión es obligatoria
+    </p>
+    <ion-item>
+      <ion-label position="floating">Télefono</ion-label>
+      <ion-input formControlName="Telefono" type="tel"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Telefono?.invalid && Telefono?.touched">
+       El número de Télefono es obligatorio
+    </p>
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input formControlName="Correo" type="email"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Correo?.invalid && Correo?.touched">
+       El correo es obligatorio
+    </p>
+    <ion-item>
+      <ion-label position="floating">Carnet</ion-label>
+      <ion-input formControlName="Carnet" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Carnet?.invalid && Carnet?.touched">
+       El Carnet es obligatorio
+    </p>
+    <ion-button color="secondary" size="small" type="submit" [disabled]="registroForm.invalid">
+      Enviar registro Coordinador
+    </ion-button>
+  </form>
+</ion-content>

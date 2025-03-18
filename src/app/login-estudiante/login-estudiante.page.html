@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="volver" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>login-estudiante</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login-estudiante</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-button size="small"  color="primary" (click)="confirmarNavegacionEstudiantil()">
+    <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+    Registro Estudiantil
+  </ion-button>
+   <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombres y Apellidos</ion-label>
+      <ion-input formControlName="Nombres_Apellidos" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Nombres_Apellidos?.invalid && Nombres_Apellidos?.touched">
+      Para iniciar Sesión el nombre y el apellido son obligatorios
+    </p>
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input formControlName="Correo" type="email"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Correo?.invalid && Correo?.touched">
+      Para iniciar Sesión el correo electrónico son obligatorios
+    </p>
+    <ion-button color="primary"size="small" type="submit" [disabled]="registroForm.invalid">Iniciar Sesión Estudiante</ion-button>
+   </form>
+</ion-content>

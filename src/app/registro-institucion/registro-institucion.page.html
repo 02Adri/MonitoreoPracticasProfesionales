@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+       <ion-back-button defaultHref="/home" text="volver" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro de la Institución</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">registroInstitucion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating"> Nombres y Apellidos</ion-label>
+      <ion-input formControlName="Nombres_Apellidos" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Nombres_Apellidos?.invalid && Nombres_Apellidos?.touched">
+      Los Nombres y los Apellidos son Obligatorios
+    </p>
+    <ion-item>
+      <ion-label position="floating">Nombre de la Institución</ion-label>
+      <ion-input formControlName="Nombre_Institucion" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Nombre_Institucion?.invalid && Nombre_Institucion?.touched">
+       El Nombre de la Institucion es obligatorio
+    </p>
+    <ion-item>
+      <ion-label position="floating">Profesión</ion-label>
+      <ion-input formControlName="Profesion" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Profesion?.invalid && Profesion?.touched">
+         La profesión es obligatoria
+    </p>
+    <ion-item>
+      <ion-label position="floating">Número de Cedúla</ion-label>
+      <ion-input formControlName="Cedula" type="text"></ion-input>
+    </ion-item>
+    <p class="error" *ngIf="Cedula?.invalid && Cedula?.touched">
+      El número de Cedúla es obligatorio
+    </p>
+      <ion-item>
+        <ion-label position="floating">Número de Télefono</ion-label>
+        <ion-input formControlName="Telefono" type="tel"></ion-input>
+      </ion-item>
+      <p class="error" *ngIf="Telefono?.invalid && Telefono?.touched">
+        El número de Télefono es obligatorio
+      </p>
+      <ion-item>
+        <ion-label position="floating">Correo Eléctronico</ion-label>
+        <ion-input formControlName="Correo" type="email"></ion-input>
+      </ion-item>
+      <p class="error" *ngIf="Correo?.invalid && Correo?.touched">
+        El correo eléctronico es obligatorio
+      </p>
+      <ion-button size="small" type="submit" [disabled]="registroForm.invalid">
+        Enviar Registro de Institución
+      </ion-button>
+  </form>
+</ion-content>
