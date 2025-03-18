@@ -38,4 +38,12 @@ export const routes: Routes = [
     path: 'hora-entrada-salida-estudiante',
     loadComponent: () => import('./hora-entrada-salida-estudiante/hora-entrada-salida-estudiante.page').then( m => m.HoraEntradaSalidaEstudiantePage)
   },
+  {
+    path: 'informe-coordinador',
+    loadComponent: () => import('./informe-coordinador/informe-coordinador.page').then( m => m.InformeCoordinadorPage)
+  },
+  {
+    path: 'informe-institucion',
+    loadComponent: () => import('./informe-institucion/informe-institucion.page').then( m => m.InformeInstitucionPage)
+  },
 ];
