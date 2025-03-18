@@ -66,6 +66,10 @@ export class LoginInstitucionPage implements OnInit {
                   popup:'custom-alert',
                 },
                 backdrop:true
+               }).then((result)=>{
+                if (result.isConfirmed){
+                  this.router.navigate(['/informe-institucion'])
+                }
                })
                console.log('Repuesta de la Api:', response) 
                this.registroForm.reset()

@@ -69,6 +69,10 @@ export class LoginCoordinadorPage implements OnInit {
                 popup:'custom-alert',
               },
               backdrop:true
+            }).then((result)=>{
+                if(result.isConfirmed){
+                  this.router.navigate(['/informe-coordinador'])
+                }
             })
            
             this.registroForm.reset()

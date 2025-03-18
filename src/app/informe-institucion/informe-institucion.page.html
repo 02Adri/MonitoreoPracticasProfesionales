@@ -1,13 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>informe-institucion</ion-title>
+    <ion-buttons>
+      <ion-back-button defaultHref="login-institucion" text="volver" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Informes enviados a la Institucion</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">informe-institucion</ion-title>
+      <ion-title size="large">Informe enviado a la Institucion</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div *ngIf="instituciones">
+   <h1>Bienvenido o Bienvenida,{{instituciones.Resultado.Nombres_Apellidos}}</h1>
+   <p>Correo:{{instituciones.Resultado.Correo}}</p>
+   <p>Institucion:{{instituciones.Resultado.Nombre_Institucion}}</p>
+  </div>
 </ion-content>
