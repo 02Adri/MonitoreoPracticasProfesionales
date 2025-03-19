@@ -25,7 +25,7 @@ export class loginInstitucionService{
              throw error
          } 
     }
-    async obtenerDatosLocalStorage(){
+     obtenerDatosLocalStorage(){
         const datos=localStorage.getItem('institucion')
         return datos ? JSON.parse(datos):null
     }

@@ -17,13 +17,18 @@ export class InformeInstitucionPage implements OnInit {
   constructor(private inicioInstitucion:loginInstitucionService) {
     addIcons({chevronBackOutline})
    }
-     
+     Correo:string|null=''
     private institucion=this.inicioInstitucion.obtenerDatosLocalStorage()
     instituciones:any=null
   ngOnInit() {
-   this.cargarDatosGuardados()
+    this.cargarDatosInstitucion()
   }
-   cargarDatosGuardados(){
-    this.instituciones=this.institucion
+  //Obtenemos datos de la API que consumimos 
+   cargarDatosInstitucion(){
+    
+    if(this.institucion){
+      this.instituciones=this.institucion
+      console.log('Se obtuvieron Correctamente los datos de la institucion',this.instituciones)
+    }
    }
 }

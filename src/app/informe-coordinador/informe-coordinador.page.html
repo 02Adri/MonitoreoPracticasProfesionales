@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Informe-Coordinador</ion-title>
+    <ion-buttons>
+      <ion-back-button defaultHref="/login-coordinador" text="volver" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Informes del Coordinador</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +13,9 @@
       <ion-title size="large">Informe-Coordinador</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div *ngIf="coordinadores">
+    <h1>Bienvenido o Bienvenida, {{coordinadores.Coordinador.Nombres_Apellidos}}</h1>
+    <p>Correo:{{coordinadores.Coordinador.Correo}}</p>
+    <p>Profesión:{{coordinadores.Coordinador.Profesion}}</p>
+  </div>
 </ion-content>
