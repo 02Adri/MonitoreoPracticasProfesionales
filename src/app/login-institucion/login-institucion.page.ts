@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup,Validator,ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonIcon,IonBackButton,IonButtons,IonItem,IonLabel,IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonItem,IonLabel,IonInput } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, peopleCircleOutline, personAddOutline, personCircleOutline } from 'ionicons/icons';
@@ -12,7 +12,7 @@ import { loginInstitucionService } from '../services/InicioInstitucion';
   templateUrl: './login-institucion.page.html',
   styleUrls: ['./login-institucion.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButton,IonIcon,IonBackButton,IonButtons,IonItem,IonLabel,IonInput]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButton,IonBackButton,IonButtons,IonItem,IonLabel,IonInput]
 })
 export class LoginInstitucionPage implements OnInit {
      registroForm!:FormGroup
@@ -26,29 +26,7 @@ export class LoginInstitucionPage implements OnInit {
       Correo:["",[Validators.required,Validators.email]]
     })
   }
-  //funcion de alert de registro Institucion
-  async confirmarNavegacionInstitucion(){
-    Swal.fire({
-      title:'¿Deseas Registrarte?',
-      text:'Serás dirigido a la página de Registro de la Institución',
-      icon:'question',
-      showCancelButton:true,
-      confirmButtonText:'Si,Continuar',
-      cancelButtonText:'No,Cancelar',
-      scrollbarPadding:false,
-      heightAuto:false,
-      customClass:{
-        popup:'custom-alert',
-      },
-      backdrop:true
-    }).then((result)=>{
-      if(result.isConfirmed){
-        this.router.navigate(['/registro-institucion'])
-      }
-    })
-   }
-   
-  async onSubmit(){
+   async onSubmit(){
        
            try {
             if(this.registroForm.valid){

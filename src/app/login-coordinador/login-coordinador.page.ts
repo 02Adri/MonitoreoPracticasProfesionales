@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup,ReactiveFormsModule,FormBuilder, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonIcon,IonButton,IonBackButton,IonButtons,IonLabel,IonItem,IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonLabel,IonItem,IonInput } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, peopleCircleOutline,personAddOutline,personCircleOutline } from 'ionicons/icons';
@@ -12,7 +12,7 @@ import { loginCoordinadorService } from '../services/InicioCoordinador';
   templateUrl: './login-coordinador.page.html',
   styleUrls: ['./login-coordinador.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonIcon,IonButton,IonBackButton,IonButtons,ReactiveFormsModule,IonLabel,IonInput,IonItem]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButton,IonBackButton,IonButtons,ReactiveFormsModule,IonLabel,IonInput,IonItem]
 })
 export class LoginCoordinadorPage implements OnInit {
     registroForm!:FormGroup
@@ -26,30 +26,7 @@ export class LoginCoordinadorPage implements OnInit {
       Correo:['',[Validators.required,Validators.email]]
     })
   }
-   //funcion de alert registro coordinador
-    async confirmarNavegacionCoordinador(){
    
-     Swal.fire({
-       title:'¿Deseas Registrarte?',
-       text:'Serás dirigido a la página de Registro Coordinador',
-       icon:'question',
-       showCancelButton:true,
-       confirmButtonText:'Si,Continuar',
-       cancelButtonText:'No,cancelar',
-       scrollbarPadding:false,
-       heightAuto:false,
-       customClass:{
-         popup:'custom-alert',
-   
-       },
-       backdrop:true,
-     }).then((result)=>{
-       if(result.isConfirmed){
-         this.router.navigate(['/registro-coordinador'])
-       }
-     })
-    }
-
 
     //Enviar Repuesta
     async onSubmit(){

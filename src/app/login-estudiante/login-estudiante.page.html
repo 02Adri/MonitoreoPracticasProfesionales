@@ -13,10 +13,7 @@
       <ion-title size="large">login-estudiante</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-button size="small"  color="primary" (click)="confirmarNavegacionEstudiantil()">
-    <ion-icon name="person-circle-outline" slot="start"></ion-icon>
-    Registro Estudiantil
-  </ion-button>
+ 
    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Nombres y Apellidos</ion-label>

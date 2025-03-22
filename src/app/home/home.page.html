@@ -12,10 +12,13 @@
       <ion-title size="small">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div id="container">
-    <strong>Formulario Principal para los Registros</strong>
-     <p>Bienvenidos A la nueva Era <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+   <!--Botón para iniciar sesión-->
+   <ion-button size="small" color="success" (click)="toggleDropdown('login')">
+    <ion-icon name="log-in-outline" slot="start"></ion-icon>
+    Iniciar Sesión
+   </ion-button> 
+  <div *ngIf="showLogin"  class="dropdown">
+   
       <ion-button size="small" color="success" (click)="loginNavegacionCoordinador()">
        <ion-icon name="person-add-outline" slot="start"></ion-icon>
        Iniciar Sesión Coordinador 
@@ -30,8 +33,29 @@
         <ion-icon name="people-circle-outline" slot="start"></ion-icon>
         Iniciar Sesión Institución
        </ion-button>
-      
-     
-     
     </div>
+
+    <br>
+    <!--Botón para registrarse-->
+    <ion-button size="small" color="warning" (click)="toggleDropdown('register')">
+      <ion-icon name="person-add-outline" slot="start"></ion-icon>
+      Registrarse
+    </ion-button>
+      <!--Desplegable de registro-->
+      <div *ngIf="showRegister" class="dropdown">
+        <ion-button size="small" color="success" (click)="confirmarNavegacionCoordinador()">
+          <ion-icon name="person-add-outline" slot="start"></ion-icon>
+          Registrarse Coordinador
+        </ion-button>
+        <br>
+        <ion-button size="small" color="primary" (click)="confirmarNavegacionEstudiantil()">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          Registrarse Estudiante
+        </ion-button>
+        <br>
+        <ion-button size="small" color="secondary" (click)="confirmarNavegacionInstitucion()">
+          <ion-icon name="people-circle-outline" slot="start"></ion-icon>
+          Registrarse Institución
+        </ion-button>
+      </div>
 </ion-content>

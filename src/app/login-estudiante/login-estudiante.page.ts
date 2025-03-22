@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup,FormBuilder,ReactiveFormsModule,Validator, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonIcon,IonBackButton,IonButtons,IonItem,IonLabel,IonInput} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonItem,IonLabel,IonInput} from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, peopleCircleOutline, personAddOutline, personCircleOutline } from 'ionicons/icons';
@@ -12,7 +12,7 @@ import {loginEstudianteService} from '../services/InicioEstudiante'
   templateUrl: './login-estudiante.page.html',
   styleUrls: ['./login-estudiante.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButton,IonIcon,IonBackButton,IonButtons,IonItem,IonInput,IonLabel]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButton,IonBackButton,IonButtons,IonItem,IonInput,IonLabel]
 })
 export class LoginEstudiantePage implements OnInit {
    registroForm!:FormGroup
@@ -26,30 +26,7 @@ export class LoginEstudiantePage implements OnInit {
         Correo:["",[Validators.required,Validators.email]]
     })
   }
-  //Creamos nuestra funcion de Alerta paraa registro estudiantes
-    async confirmarNavegacionEstudiantil(){
-       //Creamos nuestro alert para navegar a la siguiente pagina
-       Swal.fire({
-        title:'¿Deseas Registrarte?',
-        text:'Serás dirigido a la página de registro estudiantil',
-        icon:'question',
-        showCancelButton:true,
-        confirmButtonText:'Si,Continuar',
-        cancelButtonText:'No,cancelar',
-        scrollbarPadding:false,//evita los desplazamiento en moviles
-        heightAuto:false,//Evita que el alert se deforme en pantallas pequeñas
-        customClass:{
-          popup:'custom-alert',//clases personalizadas para el diseño
-        },
-        backdrop:true,//hace que el fondo sea opaco
-        
-       }).then((result)=>{
-        if(result.isConfirmed){
-          this.router.navigate(['/registro-estudiantil'])
-        }
-       });
   
-   }
      async onSubmit(){
       if (this.registroForm.valid) {
       try {

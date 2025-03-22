@@ -13,11 +13,7 @@
       <ion-title size="large">login-institucion</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-button size="small" color="secondary" (click)="confirmarNavegacionInstitucion()">
-    <ion-icon name="people-circle-outline" slot="start">
-     </ion-icon>
-     Registro Institucion
-  </ion-button>
+ 
    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Nombres y Apellidos</ion-label>
