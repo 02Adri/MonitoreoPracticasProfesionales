@@ -31,6 +31,7 @@
     "@capacitor/keyboard": "latest",
     "@capacitor/status-bar": "latest",
     "@ionic/angular": "^8.0.0",
+    "axios": "^1.8.4",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "ionicons": "^7.0.0",
