@@ -193,7 +193,7 @@ this.horaEntrada=now.toLocaleTimeString()
      icon:'question',
      showCancelButton:true,
     confirmButtonText:'OK',
-    cancelButtonText:'cancelar',
+    cancelButtonText:'No',
     scrollbarPadding:false,
     heightAuto:false,
     customClass:{
