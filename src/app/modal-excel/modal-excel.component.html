@@ -1,3 +1,49 @@
-<p>
-  modal-excel works!
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Vista Previa del Registro de Entrada y Salida</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Registro de Hora de Entrada y Salida Estudiantes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre y Apellidos</th>
+              <th>Correo</th>
+              <th>Fecha</th>
+              <th>Hora de Entrada</th>
+              <th>Hora de Salida</th>
+              <th>Horas Trabajadas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fila of datosPrevios.slice(1,-1)">
+              <td>{{fila[0]}}</td>
+              <td>{{fila[1]}}</td>
+              <td>{{fila[2]}}</td>
+              <td>{{fila[3]}}</td>
+              <td>{{fila[4]}}</td>
+              <td>{{fila[5]}}</td>
+               
+            </tr>
+            <tr>
+              <td colspan="5">Total</td>
+              <td>{{datosPrevios[datosPrevios.length-1][5]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

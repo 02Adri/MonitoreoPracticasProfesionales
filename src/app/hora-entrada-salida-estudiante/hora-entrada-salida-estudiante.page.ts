@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon} from '@ionic/angular/standalone';
 import * as XLSX from 'xlsx'
 import {saveAs} from 'file-saver'
 import { Router } from '@angular/router';
@@ -9,13 +9,15 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { loginEstudianteService } from '../services/InicioEstudiante';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline } from 'ionicons/icons';
+import { chevronBackOutline,eyeOutline } from 'ionicons/icons';
+import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
+import {ModalController,IonicModule} from '@ionic/angular'
 @Component({
   selector: 'app-hora-entrada-salida-estudiante',
   templateUrl: './hora-entrada-salida-estudiante.page.html',
   styleUrls: ['./hora-entrada-salida-estudiante.page.scss'],
   standalone: true,
-  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton]
+  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton,IonIcon,IonicModule]
 })
 export class HoraEntradaSalidaEstudiantePage implements OnInit {
       Nombres_Apellidos:string|null='';
@@ -26,8 +28,8 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
       horasTrabajadas:number|null=null
       fileName:string='RegistroHoras.xlsx'
        registros:any[]=[]//guarda registros acumulativos
-       constructor(private router:Router,private loginES:loginEstudianteService) { 
-        addIcons({chevronBackOutline})
+       constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController) { 
+        addIcons({chevronBackOutline,eyeOutline})
        }
        estudiante:any=null
        private datosGuardados=this.loginES.obtenerDatosLocalStorage()
@@ -186,12 +188,12 @@ this.horaEntrada=now.toLocaleTimeString()
  async guardarEnExcel(){
  
   Swal.fire({
-     title:'Descargar Excel de hora entrada y salida del Estudiante',
-     text:'¿Deseas descargar la hoja de excel con tu información?',
+     title:'Vista Previa del control de Registro de Entrada y Salida',
+     text:'¿Deseas ver el Proceso de tus registros de entrada y salida?',
      icon:'question',
      showCancelButton:true,
-    confirmButtonText:'De acuerdo',
-    cancelButtonText:'cancelar',
+    confirmButtonText:'OK',
+    cancelButtonText:'No',
     scrollbarPadding:false,
     heightAuto:false,
     customClass:{
@@ -252,8 +254,17 @@ async editarExcel(){
       datosPrevios.push(['','','','','Total',sumaHoras])
      // Guardar los datos actualizados en localStorage
    localStorage.setItem(`registro_${this.fileName}`, JSON.stringify(datosPrevios));
-    //Crear la hoja de excel y el libro
-    const ws:XLSX.WorkSheet=XLSX.utils.aoa_to_sheet(datosPrevios)
+   
+      //Abrir el modal en lugar de descargar el excel
+      const modal=await this.modalCtrl.create({
+        component:ModalExcelComponent,
+        componentProps:{
+          datosPrevios
+        }
+      })
+    await modal.present()
+   //Crear la hoja de excel y el libro
+   /* const ws:XLSX.WorkSheet=XLSX.utils.aoa_to_sheet(datosPrevios)
      
        //Aplicar estilos de tablas en Excel
            const range=XLSX.utils.decode_range(ws['!ref']!)
@@ -267,7 +278,7 @@ async editarExcel(){
     //Generar archivo y guardar
     const excelBuffer:any=XLSX.write(wb,{bookType:'xlsx',type:'array'})
     const dataBlob:Blob=new Blob([excelBuffer],{type:'application/octet-stream'})
-    saveAs(dataBlob,this.fileName)
+    saveAs(dataBlob,this.fileName)*/
  } catch (error) {
    console.error('Error al guardar el archivo excel 2019, intentar de nuevo',error)
  }
