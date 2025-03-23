@@ -29,16 +29,18 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
       totalHoras:number=0
       fileName:string='RegistroHoras.xlsx'
        registros:any[]=[]//guarda registros acumulativos
+       estudiante:any=null
+       private datosGuardados=this.loginES.obtenerDatosLocalStorage()
        constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController) { 
         addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline})
+        this.estudiante=this.datosGuardados
           //cargar horas almacenadas previamente al iniciar la aplicacion
-          const horasGuardadas=localStorage.getItem('totalHoras')
+          const horasGuardadas=localStorage.getItem(`totalHoras_${this.estudiante.Estudiante.Correo}`)
           if(horasGuardadas){
             this.totalHoras=parseFloat(horasGuardadas)//convertimos a un número
           }
        }
-       estudiante:any=null
-       private datosGuardados=this.loginES.obtenerDatosLocalStorage()
+      
 
   async ngOnInit() {
       this.obtenerDatosEstudiante()
@@ -257,7 +259,7 @@ async editarExcel(){
            .reduce((total,fila)=>total +(parseFloat(fila[5])||0),0 )
         this.totalHoras=sumaHoras
         //Guardamos en 'totalHoras' y lo almacenamos en el localStorage
-        localStorage.setItem('totalHoras',this.totalHoras.toString())
+        localStorage.setItem(`totalHoras_${this.estudiante.Estudiante.Correo}`,this.totalHoras.toString())
       //Agregamos fila de total al final
       datosPrevios.push(['','','','','Total',sumaHoras])
      // Guardar los datos actualizados en localStorage
