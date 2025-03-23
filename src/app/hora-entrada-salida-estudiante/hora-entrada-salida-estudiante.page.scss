@@ -46,3 +46,15 @@ ion-button{
     font-weight: bold;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
   }
+  /* Estilo del menú */
+ion-menu {
+  --width: 250px;
+}
+
+/* Centrar botones dentro del menú */
+ion-menu ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
