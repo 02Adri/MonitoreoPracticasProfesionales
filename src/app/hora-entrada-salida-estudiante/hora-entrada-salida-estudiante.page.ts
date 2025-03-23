@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon,IonCard,IonCardHeader,IonCardContent,IonCardTitle} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon,IonCard,IonCardHeader,IonCardContent,IonCardTitle,IonApp,IonMenu,IonMenuButton} from '@ionic/angular/standalone';
 import * as XLSX from 'xlsx'
 import {saveAs} from 'file-saver'
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import {ModalController,IonicModule} from '@ionic/angular'
   templateUrl: './hora-entrada-salida-estudiante.page.html',
   styleUrls: ['./hora-entrada-salida-estudiante.page.scss'],
   standalone: true,
-  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton,IonIcon,IonicModule,IonCard,IonCardHeader,IonCardContent,IonCardTitle]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton,IonIcon,IonicModule,IonCard,IonCardHeader,IonCardContent,IonCardTitle,IonApp,IonMenu,IonMenuButton]
 })
 export class HoraEntradaSalidaEstudiantePage implements OnInit {
       Nombres_Apellidos:string|null='';

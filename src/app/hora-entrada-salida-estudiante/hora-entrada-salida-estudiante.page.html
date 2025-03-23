@@ -1,52 +1,73 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login-estudiante" text="volver" icon="chevron-back-outline"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Hora de Entrada y Salida del Estudiante</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-label position="stacked">Fecha de Hoy</ion-label>
+        <ion-input [(ngModel)]="fechaHoy" readonly></ion-input>
+      </ion-item>
+      <ion-button  size="small"color="success" (click)="registrarEntrada()">
+        <ion-icon slot="start" name="enter-outline"></ion-icon> 
+        Registrar Entrada
+      </ion-button>
+      <br>
+      <ion-button  size="small" color="danger" (click)="registrarSalida()">
+        <ion-icon slot="start" name="exit-outline"></ion-icon> 
+        Registrar Salida
+      </ion-button>
+      <br>
+      <ion-button size="small" color="success" (click)="guardarEnExcel()">
+       <ion-icon slot="start" name="eye-outline"></ion-icon> 
+        Vista Previa
+      </ion-button>
+    </ion-content>
+  </ion-menu>
+  <!--Contenido fuera del menu-->
+  <div class="main-content" id="main-content">
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-buttons slot="end">
+         <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/login-estudiante" text="volver" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Hora de Entrada y Salida del Estudiante</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content [fullscreen]="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large"></ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <div *ngIf="estudiante">
+        <h2>Bienvenida o Bienvenido,{{estudiante.Estudiante.Nombres_Apellidos}}</h2>
+        <p>Correo:{{estudiante.Estudiante.Correo}}</p>
+        <p>Nº de Carnet:{{estudiante.Estudiante.Carnet}}</p>
+      </div>
+      <div *ngIf="!estudiante">
+        <p>Cargando datos...</p>
+      </div>
+      
+      <!--Vista previa de las horas trabajadas del Estudiante-->
+       <ion-card class="total-horas-card">
+       <ion-card-title> Total de Horas Trabajadas</ion-card-title>
+        <ion-card-header>
+          <ion-card-content>
+            <ion-icon  name="time-outline" class="icon-horas"></ion-icon>
+            <h2 class="total-horas">{{totalHoras}}</h2>
+          </ion-card-content>
+        </ion-card-header>
+       </ion-card>
+    </ion-content>
+    
+  </div>
+</ion-app>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"></ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div *ngIf="estudiante">
-    <h2>Bienvenida o Bienvenido,{{estudiante.Estudiante.Nombres_Apellidos}}</h2>
-    <p>Correo:{{estudiante.Estudiante.Correo}}</p>
-    <p>Nº de Carnet:{{estudiante.Estudiante.Carnet}}</p>
-  </div>
-  <div *ngIf="!estudiante">
-    <p>Cargando datos...</p>
-  </div>
-  <ion-item>
-    <ion-label position="stacked">Fecha de Hoy</ion-label>
-    <ion-input [(ngModel)]="fechaHoy" readonly></ion-input>
-  </ion-item>
-  <ion-button  size="small"color="success" (click)="registrarEntrada()">
-    <ion-icon slot="start" name="enter-outline"></ion-icon> 
-    Registrar Entrada
-  </ion-button>
-  <br>
-  <ion-button  size="small" color="danger" (click)="registrarSalida()">
-    <ion-icon slot="start" name="exit-outline"></ion-icon> 
-    Registrar Salida
-  </ion-button>
-  <br>
-  <ion-button size="small" color="success" (click)="guardarEnExcel()">
-   <ion-icon slot="start" name="eye-outline"></ion-icon> 
-    Vista Previa
-  </ion-button>
-  <!--Vista previa de las horas trabajadas del Estudiante-->
-   <ion-card class="total-horas-card">
-   <ion-card-title> Total de Horas Trabajadas</ion-card-title>
-    <ion-card-header>
-      <ion-card-content>
-        <ion-icon  name="time-outline" class="icon-horas"></ion-icon>
-        <h2 class="total-horas">{{totalHoras}}</h2>
-      </ion-card-content>
-    </ion-card-header>
-   </ion-card>
-</ion-content>
+
