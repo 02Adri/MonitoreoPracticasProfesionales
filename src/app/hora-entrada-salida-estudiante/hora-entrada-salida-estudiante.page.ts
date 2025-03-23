@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon,IonCard,IonCardHeader,IonCardContent,IonCardTitle} from '@ionic/angular/standalone';
 import * as XLSX from 'xlsx'
 import {saveAs} from 'file-saver'
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { loginEstudianteService } from '../services/InicioEstudiante';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline,eyeOutline,enterOutline,exitOutline } from 'ionicons/icons';
+import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline } from 'ionicons/icons';
 import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
 import {ModalController,IonicModule} from '@ionic/angular'
 @Component({
@@ -17,7 +17,7 @@ import {ModalController,IonicModule} from '@ionic/angular'
   templateUrl: './hora-entrada-salida-estudiante.page.html',
   styleUrls: ['./hora-entrada-salida-estudiante.page.scss'],
   standalone: true,
-  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton,IonIcon,IonicModule]
+  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton,IonIcon,IonicModule,IonCard,IonCardHeader,IonCardContent,IonCardTitle]
 })
 export class HoraEntradaSalidaEstudiantePage implements OnInit {
       Nombres_Apellidos:string|null='';
@@ -26,10 +26,16 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
       horaSalida:string|null=null;
       fechaHoy:string=new Date().toISOString().split('T')[0]
       horasTrabajadas:number|null=null
+      totalHoras:number=0
       fileName:string='RegistroHoras.xlsx'
        registros:any[]=[]//guarda registros acumulativos
        constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController) { 
-        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline})
+        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline})
+          //cargar horas almacenadas previamente al iniciar la aplicacion
+          const horasGuardadas=localStorage.getItem('totalHoras')
+          if(horasGuardadas){
+            this.totalHoras=parseFloat(horasGuardadas)//convertimos a un número
+          }
        }
        estudiante:any=null
        private datosGuardados=this.loginES.obtenerDatosLocalStorage()
@@ -249,7 +255,9 @@ async editarExcel(){
       let sumaHoras=datosPrevios
            .slice(1)//omite los encabezados
            .reduce((total,fila)=>total +(parseFloat(fila[5])||0),0 )
-
+        this.totalHoras=sumaHoras
+        //Guardamos en 'totalHoras' y lo almacenamos en el localStorage
+        localStorage.setItem('totalHoras',this.totalHoras.toString())
       //Agregamos fila de total al final
       datosPrevios.push(['','','','','Total',sumaHoras])
      // Guardar los datos actualizados en localStorage
