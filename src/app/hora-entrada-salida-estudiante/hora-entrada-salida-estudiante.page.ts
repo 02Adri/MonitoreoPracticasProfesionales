@@ -9,7 +9,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { loginEstudianteService } from '../services/InicioEstudiante';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline,eyeOutline } from 'ionicons/icons';
+import { chevronBackOutline,eyeOutline,enterOutline,exitOutline } from 'ionicons/icons';
 import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
 import {ModalController,IonicModule} from '@ionic/angular'
 @Component({
@@ -29,7 +29,7 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
       fileName:string='RegistroHoras.xlsx'
        registros:any[]=[]//guarda registros acumulativos
        constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController) { 
-        addIcons({chevronBackOutline,eyeOutline})
+        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline})
        }
        estudiante:any=null
        private datosGuardados=this.loginES.obtenerDatosLocalStorage()
