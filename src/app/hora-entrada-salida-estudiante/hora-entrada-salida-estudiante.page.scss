@@ -1,0 +1,24 @@
+ion-button{
+    width: 75%;
+    max-width: 280px;
+    height: 45px;
+    font-size:16px;
+    font-weight: 500;
+    border-radius: 12px;
+    --background:linear-gradient(135deg,#4a90e2,#9013fe);
+    --background-hover:linear-gradient(135deg,#3b7dd8,#7d0ede);
+    --color:white
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+  
+    &:hover{
+      transform:scale(1.05);
+      --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    &:active{
+      transform:scale(0.97);
+      --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  }

@@ -26,11 +26,15 @@
     <ion-input [(ngModel)]="fechaHoy" readonly></ion-input>
   </ion-item>
   <ion-button  size="small"color="success" (click)="registrarEntrada()">
+    <ion-icon slot="start" name="enter-outline"></ion-icon> 
     Registrar Entrada
   </ion-button>
+  <br>
   <ion-button  size="small" color="danger" (click)="registrarSalida()">
+    <ion-icon slot="start" name="exit-outline"></ion-icon> 
     Registrar Salida
   </ion-button>
+  <br>
   <ion-button size="small" color="success" (click)="guardarEnExcel()">
    <ion-icon slot="start" name="eye-outline"></ion-icon> 
     Vista Previa
