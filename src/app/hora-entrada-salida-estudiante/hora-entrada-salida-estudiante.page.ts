@@ -9,7 +9,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { loginEstudianteService } from '../services/InicioEstudiante';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline } from 'ionicons/icons';
+import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline } from 'ionicons/icons';
 import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
 import {ModalController,IonicModule} from '@ionic/angular'
 @Component({
@@ -32,7 +32,7 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
        estudiante:any=null
        private datosGuardados=this.loginES.obtenerDatosLocalStorage()
        constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController) { 
-        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline})
+        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline})
         this.estudiante=this.datosGuardados
           //cargar horas almacenadas previamente al iniciar la aplicacion
           const horasGuardadas=localStorage.getItem(`totalHoras_${this.estudiante.Estudiante.Correo}`)
@@ -293,4 +293,25 @@ async editarExcel(){
    console.error('Error al guardar el archivo excel 2019, intentar de nuevo',error)
  }
 }
+//funcion de navegar a informes
+ navegarInforme(){
+  Swal.fire({
+    title:'Realizar Informes Estudiantes',
+    text:'¿Deseas ver los informes de los estudiantes?',
+    icon:'question',
+    showCancelButton:true,
+    confirmButtonText:'OK',
+    cancelButtonText:'No',
+    scrollbarPadding:false,
+    heightAuto:false,
+    customClass:{
+      popup:'custom-alert',
+    },
+    backdrop:true
+  }).then((resultado)=>{
+    if(resultado.isConfirmed){
+      this.router.navigate(['/crear-informe-estudiante'])
+    }
+  })
+ }
 }
