@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon,IonCard,IonCardHeader,IonCardContent,IonCardTitle,IonApp,IonMenu,IonMenuButton} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon,IonCard,IonCardHeader,IonCardContent,IonCardTitle,IonApp,IonMenu,IonMenuButton,IonDatetime} from '@ionic/angular/standalone';
 import * as XLSX from 'xlsx'
 import {saveAs} from 'file-saver'
 import { Router } from '@angular/router';
@@ -11,27 +11,32 @@ import { loginEstudianteService } from '../services/InicioEstudiante';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline } from 'ionicons/icons';
 import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
-import {ModalController,IonicModule} from '@ionic/angular'
+import {ModalController,IonicModule,PopoverController} from '@ionic/angular'
+import { PopoverMensajeComponent } from '../popover-mensaje/popover-mensaje.component';
 @Component({
   selector: 'app-hora-entrada-salida-estudiante',
   templateUrl: './hora-entrada-salida-estudiante.page.html',
   styleUrls: ['./hora-entrada-salida-estudiante.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton,IonIcon,IonicModule,IonCard,IonCardHeader,IonCardContent,IonCardTitle,IonApp,IonMenu,IonMenuButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonLabel,IonItem,IonInput,IonBackButton,IonButtons,IonButton,IonIcon,IonicModule,IonCard,IonCardHeader,IonCardContent,IonCardTitle,IonApp,IonMenu,IonMenuButton,IonDatetime]
 })
 export class HoraEntradaSalidaEstudiantePage implements OnInit {
       Nombres_Apellidos:string|null='';
       Correo:string|null='';
       horaEntrada:string|null=null;
       horaSalida:string|null=null;
-      fechaHoy:string=new Date().toISOString().split('T')[0]
+    fechaHoy:string=new Date().toISOString().split('T')[0]
       horasTrabajadas:number|null=null
       totalHoras:number=0
       fileName:string='RegistroHoras.xlsx'
        registros:any[]=[]//guarda registros acumulativos
        estudiante:any=null
+       fechaInicio:string= new Date().toISOString().split('T')[0]
+       diasPracticas:number=70//número de días requerido
+       diasCompletos:number=0//días completados
        private datosGuardados=this.loginES.obtenerDatosLocalStorage()
-       constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController) { 
+       botonHabilitado:boolean=false;//bandera para hablitar o deshabilitar boton
+       constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController,private popoverCtrl:PopoverController) { 
         addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline})
         this.estudiante=this.datosGuardados
           //cargar horas almacenadas previamente al iniciar la aplicacion
@@ -46,7 +51,13 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
       this.obtenerDatosEstudiante()
      
     }
-    
+      //calcular días completados
+      calcularDiasCompletos(){
+        const fechaInicio=new Date(this.fechaInicio)
+        const fechaHoy=new Date()
+        const diferencia=Math.ceil((fechaHoy.getTime()-fechaInicio.getTime())/(1000*3600*24))
+        this.diasCompletos=diferencia
+      }
     //Obtenemos los datos que consumimos desde la API
     async obtenerDatosEstudiante(){
     
@@ -314,4 +325,90 @@ async editarExcel(){
     }
   })
  }
+ //Descargar excel siempre y cuando cumpla 70 dias
+
+ async mostrarExcel(){
+  //calcular los dias completos al iniciar la descarga
+  this.calcularDiasCompletos()
+  if(this.diasCompletos<this.diasPracticas){
+    //mostrar  popover informando sobre los dias requeridos
+    const popover=await this.popoverCtrl.create({
+      component:PopoverMensajeComponent,
+      translucent:true,
+      componentProps:{
+        mensaje:`Debe Completar los ${this.diasPracticas} días de prácticas para poder descargar el archivo Excel`,
+      },
+    })
+    await popover.present()
+    return
+  }
+      try {
+    //cremos los datos del usuario
+    // Intentar recuperar datos previos desde localStorage
+    let datosPrevios: any[] = JSON.parse(localStorage.getItem(`registro_${this.fileName}`) || '[]');
+     
+    //Intentar cargar el archivo existente para no perder los datos
+    try {
+     const response=await fetch(this.fileName)
+     const arrayBuffer=await response.arrayBuffer()
+     const workbook=XLSX.read(arrayBuffer,{type:'array'})
+     const sheet=workbook.Sheets[workbook.SheetNames[0]]
+     datosPrevios=XLSX.utils.sheet_to_json(sheet,{header:1})
+    } catch (error) {
+     console.log('No se encontro archivo previo, se creara uno nuevo')
+    }
+    //Si el archivo no tiene encabezados agregarselos
+    this.estudiante=this.datosGuardados
+    if(datosPrevios.length===0){
+        datosPrevios.push(['Nombres_Apellidos','Correo','Fecha','Hora Entrada','Hora Salida','Horas Trabajadas','Total'])
+    }else{
+      //Eliminamos la fila del total antes de agregar un nuevo elemento
+      if(datosPrevios[datosPrevios.length-1][0]==='Total'){
+        datosPrevios.pop()
+      }
+    }
+    //Agragamos el archivo
+    datosPrevios.push([
+     this.estudiante.Estudiante.Nombres_Apellidos,
+     this.estudiante.Estudiante.Correo,
+     this.fechaHoy,
+     this.horaEntrada,
+     this.horaSalida,
+     this.horasTrabajadas,
+    
+    ])
+      //Calculamos la suma de la columna de horas trabajadas
+      let sumaHoras=datosPrevios
+           .slice(1)//omite los encabezados
+           .reduce((total,fila)=>total +(parseFloat(fila[5])||0),0 )
+       
+      //Agregamos fila de total al final
+      datosPrevios.push(['','','','','Total',sumaHoras])
+     // Guardar los datos actualizados en localStorage
+   localStorage.setItem(`registro_${this.fileName}`, JSON.stringify(datosPrevios));
+   
+   //Crear la hoja de excel y el libro
+   const ws:XLSX.WorkSheet=XLSX.utils.aoa_to_sheet(datosPrevios)
+     
+       //Aplicar estilos de tablas en Excel
+           const range=XLSX.utils.decode_range(ws['!ref']!)
+          ws['!autofilter']={ref:XLSX.utils.encode_range(range)}//filtro de tabla
+             //ajustar automaticamente el ancho de las columnas
+             ws['!cols']=datosPrevios[0].map(()=>({wch:20}))
+             //crear el libro y añadir ls hoja
+    const wb:XLSX.WorkBook=XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(wb,ws,'Registro')
+
+    //Generar archivo y guardar
+    const excelBuffer:any=XLSX.write(wb,{bookType:'xlsx',type:'array'})
+    const dataBlob:Blob=new Blob([excelBuffer],{type:'application/octet-stream'})
+    saveAs(dataBlob,this.fileName)
+ } catch (error) {
+   console.error('Error al guardar el archivo excel 2019, intentar de nuevo',error)
+ }
+
+ }
 }
+
+
+

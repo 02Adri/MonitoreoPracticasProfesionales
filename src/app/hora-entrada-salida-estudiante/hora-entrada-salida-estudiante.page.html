@@ -59,7 +59,13 @@
       <div *ngIf="!estudiante">
         <p>Cargando datos...</p>
       </div>
-      
+       <ion-item>
+        <ion-label>Fecha de Inicio de Prácticas Profesionales</ion-label>
+        <ion-datetime [(ngModel)]="fechaInicio" display-format="YYYY-MM-DD" (ionChange)="calcularDiasCompletos()"></ion-datetime>
+       </ion-item>
+       <!--Mostrar dias completos-->
+       <p>Días Completos:{{diasCompletos}}/{{diasPracticas}}</p>
+       <ion-button  (click)="mostrarExcel()">Descargar Excel</ion-button>
       <!--Vista previa de las horas trabajadas del Estudiante-->
        <ion-card class="total-horas-card">
        <ion-card-title> Total de Horas Trabajadas</ion-card-title>
