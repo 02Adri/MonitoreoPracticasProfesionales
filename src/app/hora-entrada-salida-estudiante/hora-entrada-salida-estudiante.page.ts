@@ -49,14 +49,30 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
 
   async ngOnInit() {
       this.obtenerDatosEstudiante()
+      this.obtenerFechaInicio()
+      this.calcularDiasCompletos()
      
+    }
+    //Obtener fecha de Inicio
+    obtenerFechaInicio(){
+      //intentar recuperar la fecha de inicio de localStorage
+      const fechaGuardada=localStorage.getItem(`fechaInicio_${this.estudiante.Estudiante.Correo}`)
+      if(fechaGuardada){
+        this.fechaInicio=fechaGuardada
+      }else{
+        //Si no hay fecha guardada, establecer la actual como fecha de inicio
+         this.fechaInicio=this.fechaHoy
+         localStorage.setItem(`fechaInicio_${this.estudiante.Estudiante.Correo}`,this.fechaInicio)
+      }
     }
       //calcular días completados
       calcularDiasCompletos(){
+       if(this.fechaInicio){
         const fechaInicio=new Date(this.fechaInicio)
         const fechaHoy=new Date()
         const diferencia=Math.ceil((fechaHoy.getTime()-fechaInicio.getTime())/(1000*3600*24))
         this.diasCompletos=diferencia
+       }
       }
     //Obtenemos los datos que consumimos desde la API
     async obtenerDatosEstudiante(){

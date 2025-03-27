@@ -61,7 +61,7 @@
       </div>
        <ion-item>
         <ion-label>Fecha de Inicio de Prácticas Profesionales</ion-label>
-        <ion-datetime [(ngModel)]="fechaInicio" display-format="YYYY-MM-DD" (ionChange)="calcularDiasCompletos()"></ion-datetime>
+        <ion-datetime [(ngModel)]="fechaInicio" display-format="YYYY-MM-DD"></ion-datetime>
        </ion-item>
        <!--Mostrar dias completos-->
        <p>Días Completos:{{diasCompletos}}/{{diasPracticas}}</p>
