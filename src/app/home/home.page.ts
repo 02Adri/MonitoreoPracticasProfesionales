@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { IonHeader, IonToolbar, IonTitle, IonContent,IonButton,IonIcon} from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent,IonButton,IonIcon, IonFooter } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import{heart,happy,personAddOutline,personCircleOutline,peopleCircleOutline,logInOutline} from 'ionicons/icons'
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import  Swal  from 'sweetalert2'
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent,IonButton,IonIcon,CommonModule],
+  imports: [IonFooter, IonHeader, IonToolbar, IonTitle, IonContent,IonButton,IonIcon,CommonModule],
 })
 export class HomePage {
   constructor(private router:Router) {
