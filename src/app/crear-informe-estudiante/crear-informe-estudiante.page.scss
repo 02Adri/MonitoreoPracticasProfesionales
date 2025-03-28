@@ -1,0 +1,12 @@
+ion-menu {
+    --width: 250px;
+  }
+  
+  /* Centrar botones dentro del menú */
+  ion-menu ion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
