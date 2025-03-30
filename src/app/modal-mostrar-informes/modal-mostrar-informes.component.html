@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Mostrar Informes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+       
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="contenedor">
+    <p>Informes de la estudiante:{{estudiante.Estudiante.Nombres_Apellidos}}</p>
+    <ion-list *ngIf="informes.length > 0; else noArchivos">
+      <ion-item *ngFor="let informe of informes">
+         <ion-label>
+          <h2>{{informe.nombre}}</h2>
+          <p>{{informe.tipo}}</p>
+         </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ng-template #noArchivos>
+    <div class="mensaje">
+      <p>No hay archivos almacenadoa aún.</p>
+    </div>
+  </ng-template>
+</ion-content>

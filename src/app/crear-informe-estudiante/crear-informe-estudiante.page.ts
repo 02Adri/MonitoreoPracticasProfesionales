@@ -6,16 +6,22 @@ import {AppLauncher} from '@capacitor/app-launcher'
 import {Platform} from '@ionic/angular'
 import { addIcons } from 'ionicons';
 import { chevronBackOutline,addCircleOutline } from 'ionicons/icons';
+import {loginEstudianteService} from '../services/InicioEstudiante'
+import { ModalMostrarInformesComponent } from '../modal-mostrar-informes/modal-mostrar-informes.component';
+import { ModalSubirInformesComponent } from '../modal-subir-informes/modal-subir-informes.component';
+import { ModalController,IonicModule} from '@ionic/angular';
 @Component({
   selector: 'app-crear-informe-estudiante',
   templateUrl: './crear-informe-estudiante.page.html',
   styleUrls: ['./crear-informe-estudiante.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButtons,IonBackButton,IonButton,IonApp,IonMenu,IonMenuButton,IonIcon]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButtons,IonBackButton,IonButton,IonApp,IonMenu,IonMenuButton,IonIcon,IonicModule]
 })
 export class CrearInformeEstudiantePage implements OnInit {
-
-  constructor(private platform:Platform) { 
+    private datosGuardados=this.loginEs.obtenerDatosLocalStorage()
+    estudiante:any=this.datosGuardados;
+    archivos:any[]=[];
+    constructor(private platform:Platform,private loginEs:loginEstudianteService,private modalController:ModalController) { 
     addIcons({chevronBackOutline,addCircleOutline})
   }
 
@@ -35,5 +41,28 @@ export class CrearInformeEstudiantePage implements OnInit {
     //abriendo para la web
     window.open(webUrl,'_blank')
   }
+}
+
+ //Abril modal para carga de archivos
+ async abrirModalSubirArchivos(){
+  const modal = await this.modalController.create({
+    component: ModalSubirInformesComponent,
+    componentProps: {
+      estudiante: this.estudiante
+    },
+   
+  });
+   await modal.present();
+}
+//Abrir modal para mostrar archivos
+async abrirModalMostrarArchivos(){
+  const modal = await this.modalController.create({
+    component: ModalMostrarInformesComponent,
+    componentProps: {
+      estudiante: this.estudiante
+    },
+    
+  });
+   await modal.present();
 }
 }

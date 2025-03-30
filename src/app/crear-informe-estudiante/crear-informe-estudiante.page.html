@@ -7,9 +7,14 @@
       </ion-header>
     </ion-toolbar>
     <ion-content class="ion-padding">
-      <ion-button color="warning" >
+      <ion-button color="warning" (click)="abrirModalSubirArchivos()" >
         <ion-icon name="add-circle-outline"></ion-icon>
         Subir Informes
+      </ion-button>
+      <br>
+      <ion-button color="secondary" (click)="abrirModalMostrarArchivos()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        Mostrar Informes
       </ion-button>
     </ion-content>
   </ion-menu>
