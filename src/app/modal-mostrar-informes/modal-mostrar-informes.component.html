@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title>Mostrar Informes</ion-title>
+    <ion-title>Mostrar Informes {{estudiante.Estudiante.Nombres_Apellidos}} </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cerrarModal()">
        
@@ -13,11 +13,13 @@
   <div class="contenedor">
     <p>Informes de la estudiante:{{estudiante.Estudiante.Nombres_Apellidos}}</p>
     <ion-list *ngIf="informes.length > 0; else noArchivos">
-      <ion-item *ngFor="let informe of informes">
+      <ion-item *ngFor="let informe of informes;let i = index" >
          <ion-label>
           <h2>{{informe.nombre}}</h2>
           <p>{{informe.tipo}}</p>
          </ion-label>
+         <ion-button fill="clear" (click)="cambiarArchivos(i)">Cambiar el Archivo</ion-button>
+          <ion-button color="danger" fill="clear" (click)="eliminarArchivo(i)">Eliminar</ion-button>
       </ion-item>
     </ion-list>
   </div>
