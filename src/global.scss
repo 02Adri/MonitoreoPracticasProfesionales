@@ -32,13 +32,13 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+//@import "@ionic/angular/css/palettes/dark.always.css"; 
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+//@import '@ionic/angular/css/palettes/dark.system.css';
 
 
 .custom-alert{
     border-radius: 15px !important;
     z-index: 99999 !important;
-    backdrop-filter: blur(10px) !important;/*Difumina el fondo*/
+    
 }

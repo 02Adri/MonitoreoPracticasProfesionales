@@ -1,12 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar class="div_header">
-    <img class="img_logo"
-    src="assets/img/Untitled_logo_5_free-file.jpg"
-    alt=""
-  />
-    <ion-title> BIENVENIDO AL SISTEMA ESTUDIANTIL </ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -15,42 +7,41 @@
     </ion-toolbar>
   </ion-header>
   
+ 
 
-  <!--Botón para iniciar sesión-->
-  <ion-button size="small" color="primary" (click)="toggleDropdown('login')">
-    <ion-icon name="log-in-outline" slot="start"></ion-icon>
-    Iniciar Sesión
-  </ion-button>
-  <div *ngIf="showLogin" class="dropdown">
-    <ion-button
-      size="small"
-      color="success"
-      (click)="loginNavegacionCoordinador()"
-    >
-      <ion-icon name="person-add-outline" slot="start"></ion-icon>
-      Iniciar Sesión Coordinador
-    </ion-button>
-    <br />
-    <ion-button
-      size="small"
-      color="primary"
-      (click)="loginNavegacionEstudiante()"
-    >
-      <ion-icon name="person-circle-outline" slot="start"></ion-icon>
-      Iniciar Sesión Estudiante
-    </ion-button>
-    <br />
-    <ion-button
-      size="small"
-      color="secondary"
-      (click)="loginNavegacionInstitucion()"
-    >
-      <ion-icon name="people-circle-outline" slot="start"></ion-icon>
-      Iniciar Sesión Institución
-    </ion-button>
+<!-- Contenido de la página -->
+<ion-content >
+  <div class="div_header">
+    <!-- Tu contenido aquí -->
+    <img class="img_logo" src="assets/img/Untitled_logo_5_free-file.jpg" alt="" />
+    <ion-title> BIENVENIDO AL SISTEMA ESTUDIANTIL </ion-title>
+
   </div>
-
-  <br />
+  <div class="div-form">
+    <div class="item1">
+      <ion-button size="small" color="primary" (click)="toggleDropdown('login')">
+        <ion-icon name="log-in-outline" slot="start"></ion-icon>
+        Iniciar Sesión
+      </ion-button>
+      <div *ngIf="showLogin" class="dropdown">
+        <ion-button size="small" color="success" (click)="loginNavegacionCoordinador()">
+          <ion-icon name="person-add-outline" slot="start"></ion-icon>
+          Iniciar Sesión Coordinador
+        </ion-button>
+        <br />
+        <ion-button size="small" color="primary" (click)="loginNavegacionEstudiante()">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          Iniciar Sesión Estudiante
+        </ion-button>
+        <br />
+        <ion-button size="small" color="secondary" (click)="loginNavegacionInstitucion()">
+          <ion-icon name="people-circle-outline" slot="start"></ion-icon>
+          Iniciar Sesión Institución
+        </ion-button>
+      </div>
+    </div>
+    <div class="item2">
+      <br />
   <!--Botón para registrarse-->
   <ion-button size="small" color="warning" (click)="toggleDropdown('register')">
     <ion-icon name="person-add-outline" slot="start"></ion-icon>
@@ -58,37 +49,34 @@
   </ion-button>
   <!--Desplegable de registro-->
   <div *ngIf="showRegister" class="dropdown">
-    <ion-button
-      size="small"
-      color="success"
-      (click)="confirmarNavegacionCoordinador()"
-    >
+    <ion-button size="small" color="success" (click)="confirmarNavegacionCoordinador()">
       <ion-icon name="person-add-outline" slot="start"></ion-icon>
       Registrarse Coordinador
     </ion-button>
     <br />
-    <ion-button
-      size="small"
-      color="primary"
-      (click)="confirmarNavegacionEstudiantil()"
-    >
+    <ion-button size="small" color="primary" (click)="confirmarNavegacionEstudiantil()">
       <ion-icon name="person-circle-outline" slot="start"></ion-icon>
       Registrarse Estudiante
     </ion-button>
     <br />
-    <ion-button
-      size="small"
-      color="secondary"
-      (click)="confirmarNavegacionInstitucion()"
-    >
+    <ion-button size="small" color="secondary" (click)="confirmarNavegacionInstitucion()">
       <ion-icon name="people-circle-outline" slot="start"></ion-icon>
       Registrarse Institución
     </ion-button>
   </div>
+    </div>
+  </div>
+
+
+
 </ion-content>
+
+
+  <!--Botón para iniciar sesión-->
+  
 <ion-footer>
   <ion-toolbar>
-    <ion-title> 
+    <ion-title>
       footer diseño </ion-title>
   </ion-toolbar>
 </ion-footer>

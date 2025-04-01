@@ -1,3 +1,20 @@
+:root {
+  --color-primary: #4a90e2;
+  --color-secondary: #9013fe;
+  --color-accent: #7d0ede;
+  --color-background: #f4f4f4;
+  --color-text: #333333;
+}
+
+.div_header {
+  display: flex;
+  background-color: var(--Color-gradiems);
+  background-color: --Color-gradiems;
+ color: white;
+}
+
+
+
 .dropdown {
   display: flex;
   margin-top: 10px;
@@ -5,23 +22,24 @@
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
-
   flex-direction: column;
   gap: 10px;
   align-items: center;
 }
-.div_header{
-  display: flex;
-  background-color: white;
-  border: red 2px solid;
+
+
+
+.cont_Principal {
+  background-color: #988da1;
 }
 
 
-.img_logo{
+.img_logo {
   width: 100px;
   height: 100px;
   padding: 2px;
-  border: 1px red solid ;margin: 5px;
+ 
+  margin: 5px;
 }
 
 ion-button {
