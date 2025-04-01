@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonBackButton,Io
 import {AppLauncher} from '@capacitor/app-launcher'
 import {Platform} from '@ionic/angular'
 import { addIcons } from 'ionicons';
-import { chevronBackOutline,addCircleOutline } from 'ionicons/icons';
+import { chevronBackOutline,addCircleOutline,eyeOutline } from 'ionicons/icons';
 import {loginEstudianteService} from '../services/InicioEstudiante'
 import { ModalMostrarInformesComponent } from '../modal-mostrar-informes/modal-mostrar-informes.component';
 import { ModalSubirInformesComponent } from '../modal-subir-informes/modal-subir-informes.component';
@@ -22,7 +22,7 @@ export class CrearInformeEstudiantePage implements OnInit {
     estudiante:any=this.datosGuardados;
     archivos:any[]=[];
     constructor(private platform:Platform,private loginEs:loginEstudianteService,private modalController:ModalController) { 
-    addIcons({chevronBackOutline,addCircleOutline})
+    addIcons({chevronBackOutline,addCircleOutline,eyeOutline})
   }
 
   ngOnInit() {
