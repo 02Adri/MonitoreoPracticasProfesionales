@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Subir Informes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button click="cerrarModal()"></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+   <div class="contenedor">
+    <label for="fileInput" class="custom-file-upload">
+      <input id="fileInput" type="file" multiple="true" (change)="seleccionarArchivos($event)" >
+      Seleccionar Archivos 
+    </label>
+   
+    <ul>
+      <li *ngFor=" let archivo of archivos">{{archivo.nombre}}</li>
+    </ul>
+    <ion-button size="small" color="success" (click)="subirArchivos()">Subir Archivos</ion-button>
+   </div>
+</ion-content>

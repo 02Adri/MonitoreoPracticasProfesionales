@@ -1,0 +1,81 @@
+.login-content {
+    --background: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  // Contenedor del formulario
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    
+    
+  }
+  
+  // Estilos de la tarjeta de login
+  .login-card {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  // Cabecera de la tarjeta
+  ion-card-header {
+    background: #1E3A5F;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  ion-card-title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  ion-card-subtitle {
+    font-size: 16px;
+    opacity: 0.8;
+  }
+  
+  // Estilos de los campos de entrada
+  .input-item {
+    --border-radius: 10px;
+    --border-color: #4A90E2;
+    --padding-start: 10px;
+    margin-bottom: 10px;
+  }
+  
+  // Botón de inicio de sesión
+  .login-button {
+    --background: #4A90E2;
+    --color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+  
+    &:hover {
+      --background: #357ABD;
+    }
+  }
+  
+  // Estilos de error
+  .error {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+    text-align: left;
+    padding-left: 10px;
+  }
+  
+  // Barra superior
+  .header-toolbar {
+    --background: #1E3A5F;
+    --color: white;
+  }

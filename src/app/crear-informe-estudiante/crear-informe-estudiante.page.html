@@ -1,30 +1,65 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons>
-      <ion-back-button defaultHref="/hora-entrada-salida-estudiante" text="volver" icon="chevron-back-outline"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Crear Informe de Estudiante</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Crear-Informe-Estudiante</ion-title>
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-toolbar color="primary">
+      <ion-header>
+        <ion-title>Menú de Informes </ion-title>
+      </ion-header>
     </ion-toolbar>
-  </ion-header>
-    <div class="buttons-container">
-      <ion-button expand="block" color="primary" 
-      (click)="openApp('com.microsoft.office.word','https://www.office.com/launch/word')">
-      <img src="assets/img/word.png">Microsoft Word
-    </ion-button>
-    <ion-button expand="block" color="success"
-     (click)="openApp('com.microsoft.office.excel','https://www.office.com/launch/excel')">
-     <img src="assets/img/excel.png">Microsoft Excel
-    </ion-button>
-    <ion-button expand="block" color="danger"
-     (click)="openApp('com.microsoft.office.powerpoint','https://www.office.com/launch/powerpoint')">
-     <img src="assets/img/powerpoint.png">Microsoft PowerPoint
-    </ion-button>
-    </div>
-</ion-content>
+    <ion-content class="ion-padding">
+      <ion-button color="warning" (click)="abrirModalSubirArchivos()" >
+        <ion-icon name="add-circle-outline"></ion-icon>
+        Subir Informes
+      </ion-button>
+      <br>
+      <ion-button color="secondary" (click)="abrirModalMostrarArchivos()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        Mostrar Informes
+      </ion-button>
+    </ion-content>
+  </ion-menu>
+  <div class="main-content" id="main-content">
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons>
+          <ion-back-button defaultHref="/hora-entrada-salida-estudiante" text="volver" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Crear Informe de Estudiante</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content [fullscreen]="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">Crear-Informe-Estudiante</ion-title>
+        </ion-toolbar>
+      </ion-header>
+        <div class="buttons-container">
+          <ion-button expand="block" color="primary" 
+          (click)="openApp('com.microsoft.office.word','https://www.office.com/launch/word')">
+          <img src="assets/img/word.png">Microsoft Word
+        </ion-button>
+        <ion-button expand="block" color="success"
+         (click)="openApp('com.microsoft.office.excel','https://www.office.com/launch/excel')">
+         <img src="assets/img/excel.png">Microsoft Excel
+        </ion-button>
+        <ion-button expand="block" color="danger"
+         (click)="openApp('com.microsoft.office.powerpoint','https://www.office.com/launch/powerpoint')">
+         <img src="assets/img/powerpoint.png">Microsoft PowerPoint
+        </ion-button>
+        </div>
+    </ion-content>
+    
+  </div>
+</ion-app>
+
+
+
+
+
+
+
+

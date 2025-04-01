@@ -13,6 +13,7 @@ import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,info
 import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
 import {ModalController,IonicModule,PopoverController} from '@ionic/angular'
 import { PopoverMensajeComponent } from '../popover-mensaje/popover-mensaje.component';
+import { ModalInformeLoginComponent } from '../modal-informe-login/modal-informe-login.component';
 @Component({
   selector: 'app-hora-entrada-salida-estudiante',
   templateUrl: './hora-entrada-salida-estudiante.page.html',
@@ -300,46 +301,18 @@ async editarExcel(){
         }
       })
     await modal.present()
-   //Crear la hoja de excel y el libro
-   /* const ws:XLSX.WorkSheet=XLSX.utils.aoa_to_sheet(datosPrevios)
-     
-       //Aplicar estilos de tablas en Excel
-           const range=XLSX.utils.decode_range(ws['!ref']!)
-          ws['!autofilter']={ref:XLSX.utils.encode_range(range)}//filtro de tabla
-             //ajustar automaticamente el ancho de las columnas
-             ws['!cols']=datosPrevios[0].map(()=>({wch:20}))
-             //crear el libro y añadir ls hoja
-    const wb:XLSX.WorkBook=XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(wb,ws,'Registro')
-
-    //Generar archivo y guardar
-    const excelBuffer:any=XLSX.write(wb,{bookType:'xlsx',type:'array'})
-    const dataBlob:Blob=new Blob([excelBuffer],{type:'application/octet-stream'})
-    saveAs(dataBlob,this.fileName)*/
+   
  } catch (error) {
    console.error('Error al guardar el archivo excel 2019, intentar de nuevo',error)
  }
 }
 //funcion de navegar a informes
- navegarInforme(){
-  Swal.fire({
-    title:'Realizar Informes Estudiantes',
-    text:'¿Deseas ver los informes de los estudiantes?',
-    icon:'question',
-    showCancelButton:true,
-    confirmButtonText:'OK',
-    cancelButtonText:'No',
-    scrollbarPadding:false,
-    heightAuto:false,
-    customClass:{
-      popup:'custom-alert',
-    },
-    backdrop:true
-  }).then((resultado)=>{
-    if(resultado.isConfirmed){
-      this.router.navigate(['/crear-informe-estudiante'])
-    }
-  })
+ async navegarInforme(){
+   const modal= await this.modalCtrl.create({
+    component:ModalInformeLoginComponent,
+    
+   })
+   await modal.present()
  }
  //Descargar excel siempre y cuando cumpla 70 dias
 
