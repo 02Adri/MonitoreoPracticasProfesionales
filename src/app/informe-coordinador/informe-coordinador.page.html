@@ -1,21 +1,41 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons>
-      <ion-back-button defaultHref="/login-coordinador" text="volver" icon="chevron-back-outline"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Informes del Coordinador</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Informe-Coordinador</ion-title>
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-toolbar color="secondary">
+      <ion-header>
+        <ion-title>Menú Coordinador</ion-title>
+      </ion-header>
     </ion-toolbar>
-  </ion-header>
-  <div *ngIf="coordinadores">
-    <h1>Bienvenido o Bienvenida, {{coordinadores.Coordinador.Nombres_Apellidos}}</h1>
-    <p>Correo:{{coordinadores.Coordinador.Correo}}</p>
-    <p>Profesión:{{coordinadores.Coordinador.Profesion}}</p>
+    <ion-content class="ion-padding">
+      <ion-button color="warning" fill="clear" size="small" (click)="openModalCarreras()">Ver Carreras</ion-button>
+    </ion-content>
+  </ion-menu>
+
+  <div class="main-content" id="main-content">
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons>
+          <ion-back-button defaultHref="/login-coordinador" text="volver" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Informes del Coordinador</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content [fullscreen]="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">Informe-Coordinador</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <div *ngIf="coordinadores">
+        <h1>Bienvenido o Bienvenida, {{coordinadores.Coordinador.Nombres_Apellidos}}</h1>
+        <p>Correo:{{coordinadores.Coordinador.Correo}}</p>
+        <p>Profesión:{{coordinadores.Coordinador.Profesion}}</p>
+      </div>
+    </ion-content>
   </div>
-</ion-content>
+</ion-app>
+
+
