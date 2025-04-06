@@ -5,4 +5,44 @@
     object-fit: cover;
     border: 2px solid #3880ff;
   }
+
+  /*Estilos de la barra de busqueda*/
+  ion-searchbar {
+    padding: 0 16px;
+    --background: #f4f4f4;
+    --border-radius: 10px;
+    margin-top: 10px;
+  }
+  
+  .icono-perfil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+  }
+  
+  .mensaje-vacio {
+    text-align: center;
+    margin-top: 40px;
+    color: #888;
+  
+    ion-icon {
+      font-size: 40px;
+      color: #f44336;
+    }
+  
+    p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  }
+  .resaltado {
+    font-weight: bold;
+    color: #1976d2;
+    background-color: #e3f2fd;
+    padding: 0 2px;
+    border-radius: 4px;
+  }
   

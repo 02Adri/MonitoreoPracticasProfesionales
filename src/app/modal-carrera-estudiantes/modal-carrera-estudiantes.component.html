@@ -6,23 +6,35 @@
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-searchbar
+     [(ngModel)]="searchTerm"
+     (ionInput)="filtrarEstudiantes()"
+     placeholder="Buscar Estudiante por Nombre"
+     showClearButton="always"
+     animated="true"
+
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="estudiantes.length > 0">
    
-    <ion-item *ngFor="let estudiante of estudiantes">
+    <ion-item *ngFor="let estudiante of estudiantesFiltrados">
       <img
       [src]="estudiante.imagen"
        alt="icono de foto"
        class="icono-perfil"
      />
      <ion-label>
-     <h2>{{estudiante.Nombres_Apellidos}}</h2>
+     <h2 [innerHTML]="estudiante.nombreResaltado"></h2>
       <p>Carnet:{{estudiante.Carnet}}</p>
       <p>Telefono:{{estudiante.Telefono}}</p>
      </ion-label>
     </ion-item>
   </ion-list>
+  <div class="mensaje-vacio" *ngIf="estudiantesFiltrados.length === 0">
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    <p>No se encuentra registrado el estudiante</p>
+  </div>
 </ion-content>
