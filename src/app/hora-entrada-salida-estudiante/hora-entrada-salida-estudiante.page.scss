@@ -58,3 +58,25 @@ ion-menu ion-content {
   align-items: center;
   gap: 10px;
 }
+
+//Estilos de la imagen de perfil
+.foto-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foto-perfil {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #3880ff;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.foto-perfil:hover {
+  transform: scale(1.05);
+}

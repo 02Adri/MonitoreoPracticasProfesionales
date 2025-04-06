@@ -11,9 +11,15 @@
 
 <ion-content>
   <ion-list>
+   
     <ion-item *ngFor="let estudiante of estudiantes">
+      <img
+      [src]="estudiante.imagen"
+       alt="icono de foto"
+       class="icono-perfil"
+     />
      <ion-label>
-      <h2>{{estudiante.Nombres_Apellidos}}</h2>
+     <h2>{{estudiante.Nombres_Apellidos}}</h2>
       <p>Carnet:{{estudiante.Carnet}}</p>
       <p>Telefono:{{estudiante.Telefono}}</p>
      </ion-label>

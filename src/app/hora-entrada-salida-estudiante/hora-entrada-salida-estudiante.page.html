@@ -51,11 +51,27 @@
           <ion-title size="large"></ion-title>
         </ion-toolbar>
       </ion-header>
+      <div class="foto-container">
+        <img
+        [src]="perfilImg || defaultImagen"
+        alt="Foto de perfil"
+        class="foto-perfil"
+        (click)="abrirExplorador()"
+        />
+        <input
+           type="file"
+            accept="image/*"
+            (change)="seleccionarImagen($event)"
+            #inputArchivo
+            hidden
+        />
+      </div>
       <div *ngIf="estudiante">
         <h2>Bienvenida o Bienvenido,{{estudiante.Estudiante.Nombres_Apellidos}}</h2>
         <p>Correo:{{estudiante.Estudiante.Correo}}</p>
         <p>Nº de Carnet:{{estudiante.Estudiante.Carnet}}</p>
       </div>
+     
       <div *ngIf="!estudiante">
         <p>Cargando datos...</p>
       </div>
@@ -76,6 +92,7 @@
           </ion-card-content>
         </ion-card-header>
        </ion-card>
+        
     </ion-content>
     
   </div>
