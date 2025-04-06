@@ -12,6 +12,11 @@
 <ion-content>
   <div class="contenedor">
     <p>Informes de la estudiante:{{estudiante.Estudiante.Nombres_Apellidos}}</p>
+    <img
+     [src]="perfilImg || defaultImg"
+      alt="icono de foto"
+      class="icono-perfil"
+    />
     <ion-list *ngIf="informes.length > 0; else noArchivos">
       <ion-item *ngFor="let informe of informes;let i = index" >
          <ion-label>

@@ -16,16 +16,29 @@ export class ModalMostrarInformesComponent  implements OnInit {
   private datosGuardados=this.loginEs.obtenerDatosLocalStorage()
   @Input() estudiante:any=this.datosGuardados;
    informes:any[]=[];
+   perfilImg:string|null=null
+   defaultImg:string='assets/img/perfil-removebg-preview.png'
+   
   constructor(private loginEs:loginEstudianteService,private modalController:ModalController) { }
 
   ngOnInit() {}
   ionViewWillEnter(){
     this.mostrarArchivos();
+    this.mostrarImagen();
   }
     //Mostrar los archivos en el modal
     mostrarArchivos(){
       const key=`Informes_${this.estudiante.Estudiante.Correo}`;
       this.informes=JSON.parse(localStorage.getItem(key) || '[]');
+    }
+    //mostrarImagen
+    mostrarImagen(){
+      const imagenGuardada=localStorage.getItem(`perfilImg_${this.estudiante.Estudiante.Correo}`)
+      if(imagenGuardada){
+        this.perfilImg=imagenGuardada;
+      }else{
+        this.perfilImg=null;
+      }
     }
     //Se utilizara para cambiar el archivo dentro del modal
     guardarArchivos(){

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup,ReactiveFormsModule,FormBuilder, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonLabel,IonItem,IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonLabel,IonItem,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, peopleCircleOutline,personAddOutline,personCircleOutline } from 'ionicons/icons';
@@ -12,7 +12,7 @@ import { loginCoordinadorService } from '../services/InicioCoordinador';
   templateUrl: './login-coordinador.page.html',
   styleUrls: ['./login-coordinador.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButton,IonBackButton,IonButtons,ReactiveFormsModule,IonLabel,IonInput,IonItem]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButton,IonBackButton,IonButtons,ReactiveFormsModule,IonLabel,IonInput,IonItem, IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent]
 })
 export class LoginCoordinadorPage implements OnInit {
     registroForm!:FormGroup

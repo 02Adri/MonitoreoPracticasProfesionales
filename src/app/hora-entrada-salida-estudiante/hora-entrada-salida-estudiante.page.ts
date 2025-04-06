@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar,IonLabel,IonItem,IonInput,IonBackButton,IonButtons, IonButton,IonIcon,IonCard,IonCardHeader,IonCardContent,IonCardTitle,IonApp,IonMenu,IonMenuButton,IonDatetime} from '@ionic/angular/standalone';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { loginEstudianteService } from '../services/InicioEstudiante';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline } from 'ionicons/icons';
+import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline,personCircle } from 'ionicons/icons';
 import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
 import {ModalController,IonicModule,PopoverController} from '@ionic/angular'
 import { PopoverMensajeComponent } from '../popover-mensaje/popover-mensaje.component';
@@ -37,8 +37,11 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
        diasCompletos:number=0//días completados
        private datosGuardados=this.loginES.obtenerDatosLocalStorage()
        botonHabilitado:boolean=false;//bandera para hablitar o deshabilitar boton
+       defaultImagen:string='assets/img/perfil-removebg-preview.png'//imagen por default
+       @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>
+       perfilImg:string|null=null//imagen de perfil
        constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController,private popoverCtrl:PopoverController) { 
-        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline})
+        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline,personCircle})
         this.estudiante=this.datosGuardados
           //cargar horas almacenadas previamente al iniciar la aplicacion
           const horasGuardadas=localStorage.getItem(`totalHoras_${this.estudiante.Estudiante.Correo}`)
@@ -52,6 +55,7 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
       this.obtenerDatosEstudiante()
       this.obtenerFechaInicio()
       this.calcularDiasCompletos()
+      this.cargarImagenPerfil()
      
     }
     //Obtener fecha de Inicio
@@ -396,6 +400,36 @@ async editarExcel(){
    console.error('Error al guardar el archivo excel 2019, intentar de nuevo',error)
  }
 
+ }
+
+ 
+ //cargar imagen de perfil
+ cargarImagenPerfil(){
+ const imagenGuardada=localStorage.getItem(`perfilImg_${this.estudiante.Estudiante.Correo}`)
+ if(imagenGuardada){
+  this.perfilImg=imagenGuardada
+ }else{
+  this.perfilImg='' //aseguramos qur no sea undefined
+ }
+ }
+ //seleccionar la imagen desde el explorador de archivos
+ seleccionarImagen(event:any){
+  const archivo=event.target.files[0]
+
+  if(archivo){
+     const lector= new FileReader()
+     lector.onload=()=>{
+      this.perfilImg=lector.result as string
+      localStorage.setItem(`perfilImg_${this.estudiante.Estudiante.Correo}`,this.perfilImg)
+      console.log('Imagen guardada en localStorage:',this.perfilImg)
+     }
+     lector.readAsDataURL(archivo)
+  }
+ }
+ abrirExplorador(){
+   
+  this.inputArchivo.nativeElement.click()
+   
  }
 }
 
