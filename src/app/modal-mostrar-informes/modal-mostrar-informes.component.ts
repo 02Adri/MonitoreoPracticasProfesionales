@@ -4,6 +4,10 @@ import{ ModalController,IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonButtons,IonItem,IonList,IonLabel,IonIcon } from '@ionic/angular/standalone';
 import Swal from 'sweetalert2';
+import * as EmailJS from 'emailjs-com'
+import { loginCoordinadorService } from '../services/InicioCoordinador';
+import { ModalCorreoComponent } from '../modal-correo/modal-correo.component';
+import { verificarCorreo } from '../services/verificarCorreo';
 @Component({
   selector: 'app-modal-mostrar-informes',
   templateUrl: './modal-mostrar-informes.component.html',
@@ -18,8 +22,15 @@ export class ModalMostrarInformesComponent  implements OnInit {
    informes:any[]=[];
    perfilImg:string|null=null
    defaultImg:string='assets/img/perfil-removebg-preview.png'
-   
-  constructor(private loginEs:loginEstudianteService,private modalController:ModalController) { }
+     private coordinador=this.loginCoordinador.obtenerDatosLocalStorage()
+    @Input() coordinadores:any=null
+  constructor(private loginEs:loginEstudianteService,private modalController:ModalController,private loginCoordinador:loginCoordinadorService,private vCorreo:verificarCorreo) { 
+    //obtenemos los datos del estudiante desde el localStorage
+    this.estudiante=this.loginEs.obtenerDatosLocalStorage()
+    //obtenemos los datos del coordinador desde el localStorage
+    //this.coordinadores=this.loginCoordinador.obtenerDatosLocalStorage()
+     
+   }
 
   ngOnInit() {}
   ionViewWillEnter(){
@@ -132,5 +143,99 @@ export class ModalMostrarInformesComponent  implements OnInit {
     //Cerrar el modal
     cerrarModal(){
       this.modalController.dismiss();
+    }
+
+    //Funcion para enviar informacion
+    async enviarCorreo(informe:any){ 
+       //obtener el correo desde el localStorage
+       this.coordinadores=this.coordinador
+       const modal=await this.modalController.create({
+        component:ModalCorreoComponent,
+        cssClass:'custom-alert',
+       
+       });
+       await modal.present();
+       const {data:correoCoordinador}= await modal.onDidDismiss();
+       
+          if(!correoCoordinador)return
+          //verificamos si el Corrreo existe
+          const correoGuardado= await this.vCorreo.getCorreo(correoCoordinador)
+          if(!correoGuardado){
+            Swal.fire({
+              title:'Correo no encontrado',
+              text:'El correo no se encuentra registrado',
+              icon:'error',
+              confirmButtonText:'De acuerdo',
+              scrollbarPadding:false,
+              heightAuto:false,
+              customClass:{
+               popup:'custom-alert',
+              },
+              backdrop:true
+            })
+            return
+          }
+       //Si el correo es valido, se procede a enviar el correo
+       const templateParams={
+        to_email:correoCoordinador,
+        student_name:'Informe enviado desde la app',
+        message:`Estimado Coordinador,
+        \nSe ha enviado un informe del estudiante:${this.estudiante.Estudiante.Nombres_Apellidos}
+        \nInforme:${informe.nombre}
+        \n\nSaludos cordiales,`,
+       }
+       //Enviar el Correo atraves de EmaiJS
+       EmailJS.send(
+        'service_p1b0jci',
+         'template_lqrat8f',
+          templateParams,
+          'FnZr__tdJQwu9hmoT'
+       ).then((response)=>{
+        Swal.fire({
+          title:'¡Correo Enviado!',
+          text:`El correo fue enviado correctamente`,
+          icon:'success',
+          confirmButtonText:'De acuerdo',
+          scrollbarPadding:false,
+          heightAuto:false,
+          customClass:{
+           popup:'custom-alert',
+          },
+          backdrop:true
+        })
+       }).catch((error)=>{
+        console.error('Error al enviar el correo:',error);
+        Swal.fire({
+          title:'Error',
+          text:'No se pudo enviar el correo',
+          icon:'error',
+          confirmButtonText:'De acuerdo',
+          scrollbarPadding:false,
+          heightAuto:false,
+          customClass:{
+           popup:'custom-alert',
+          },
+          backdrop:true
+        })
+       })
+       //Guardamos informes en localStorage
+       const informesGuardados=JSON.parse(localStorage.getItem('informesEnviados') || '[]');
+        //creamos nuestra variable para acceder al estudiante
+        const estudianteData={
+          Nombres_Apellidos:this.estudiante?.Nombres_Apellidos || this.estudiante?.Estudiante?.Nombres_Apellidos || '',
+          Correo:this.estudiante?.Correo || this.estudiante?.Estudiante?.Correo || '',
+          Carnet:this.estudiante?.Carnet || this.estudiante?.Estudiante?.Carnet || ''
+        }
+       //Asegurarse que sea un Arrays
+       const nuevosInformes=Array.isArray(informesGuardados) ? informesGuardados : [];
+       console.log('Estudiante:',estudianteData);
+       nuevosInformes.push({
+         correoCoordinador: correoCoordinador,
+          estudiante:estudianteData,
+          informe:informe.nombre,
+          fecha:new Date().toISOString(),
+          leido:false,
+       });
+        localStorage.setItem('informesEnviados',JSON.stringify(nuevosInformes));
     }
 }

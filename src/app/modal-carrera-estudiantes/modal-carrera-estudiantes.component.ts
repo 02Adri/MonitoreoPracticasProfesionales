@@ -8,6 +8,9 @@ import { close,alertCircleOutline } from 'ionicons/icons';
 import{loginEstudianteService} from '../services/InicioEstudiante'
 import {DomSanitizer,SafeHtml} from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms';
+import {loginCoordinadorService} from '../services/InicioCoordinador'
+import { ModalArchivosEnviadosComponent } from '../modal-archivos-enviados/modal-archivos-enviados.component';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-modal-carrera-estudiantes',
   templateUrl: './modal-carrera-estudiantes.component.html',
@@ -22,13 +25,15 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
       defaultImg:string='assets/img/perfil-removebg-preview.png'
       searchTerm:string=''
       estudiantesFiltrados:any[]=[]
-  constructor(private caService:carreraService,private modalctrl:ModalController,private loginEs:loginEstudianteService,private sanitizer:DomSanitizer) {
+      informesRecibidos:any[]=[]
+  constructor(private caService:carreraService,private modalctrl:ModalController,private loginEs:loginEstudianteService,private sanitizer:DomSanitizer, private loginCo:loginCoordinadorService) {
     addIcons({close,alertCircleOutline})
    }
 
   ngOnInit() {
      this.mostrarCarrera()
-    this.mostrarImagen()
+     this.cargarInformesRecibidos()
+     this.mostrarImagen()
   }
   //Mostrar los estudiantes de la carrera seleccionada
    mostrarCarrera(){
@@ -50,14 +55,22 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
        this.estudiantes=estudianteData.map((est:any)=>{
         const correo=est.Estudiante?.Correo || est.Correo
         const imagenGuardada=localStorage.getItem(`perfilImg_${correo}`)
+        const carnet= est.Estudiante?.Carnet || est.Carnet
+          
+        //verificar si el estudiante tiene informe nuevo no leído
+        const tieneInformeNuevo=this.informesRecibidos.some((info:any)=>
+             info.estudiante?.Carnet === carnet && !info.leido 
+        )
         return{
           ...est,
-          imagen:imagenGuardada || this.defaultImg
+          imagen:imagenGuardada || this.defaultImg,
+          tieneNotificacion:tieneInformeNuevo,
+          
         }
        })
        this.estudiantesFiltrados=this.estudiantes.map(est=>({
         ...est,
-        nombreResaltado:this.getHighligtedName(est.Nombres_Apellidos,'')
+       nombreResaltado:this.getHighligtedName(est.Nombres_Apellidos,'')
        }))
         
       } catch (error) {
@@ -90,5 +103,86 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
 
        )
        return this.sanitizer.bypassSecurityTrustHtml(nuevoNombre)
+    }
+
+    //Funcion para cargar los informes recibidos por los estudiantes
+    cargarInformesRecibidos(){
+      const coordinador=this.loginCo.obtenerDatosLocalStorage()
+      console.log('coordinador:', coordinador?.Coordinador?.Correo);
+      const informesRaw=JSON.parse(localStorage.getItem('informesEnviados')|| '[]')
+      const informes=Array.isArray(informesRaw) ? informesRaw.filter((i:any)=>i !==null) : [informesRaw]
+      //Filtrar los informes dirigidos a este coordinador
+      this.informesRecibidos=informes.filter((info:any)=>
+      
+      info?.correoCoordinador===coordinador.Coordinador?.Correo
+      )
+    }
+    //funcion para marcar como leido el informe
+    async verInforme(estudiante:any){
+      const coordinador=this.loginCo.obtenerDatosLocalStorage()
+      let informesRaw=JSON.parse(localStorage.getItem('informesEnviados')|| '[]')
+      let informes=Array.isArray(informesRaw) ? informesRaw:[informesRaw]
+      console.log('Informes cargados por enviar 3:', informes);
+    
+      const carnet = estudiante.Estudiante?.Carnet || estudiante.Carnet;
+      const correoCoordinador = coordinador?.Coordinador?.Correo;
+       const nombreEstudiante=estudiante?.Estudiante?.Nombres_Apellidos ||estudiante?.Nombres_Apellidos
+        
+       //marcar como leido el informe
+      informes=informes.map((info:any)=>{
+        if(
+          info?.correoCoordinador?.trim()?.toLowerCase() ===correoCoordinador?.trim()?.toLowerCase() &&
+          info?.estudiante?.Carnet?.trim() === carnet?.trim()
+        ){
+          return{
+            ...info,
+            leido:true
+          }
+         
+          
+        }
+        return info
+      })
+      localStorage.setItem('informesEnviados',JSON.stringify(informes))
+      //Actualizar la lista de informes recibidos
+     const informeMostrado=informes
+         .slice()
+         .reverse()
+        .find((info:any)=>
+        info?.correoCoordinador?.trim()?.toLowerCase() === correoCoordinador?.trim()?.toLowerCase()&&
+        info?.estudiante?.Carnet?.trim() ===carnet?.trim()
+      );
+      if(informeMostrado){
+       
+        Swal.fire({
+          title:'Informe Recibido de' + estudiante.Nombres_Apellidos,
+          text:`El informe fue recibido correctamente ${informeMostrado.informe}`,
+          icon:'success',
+          confirmButtonText:'De acuerdo',
+          scrollbarPadding:false,
+          heightAuto:false,
+          customClass:{
+            popup:'custom-alert',
+          },
+          backdrop:true
+        })
+      }
+      //mostrar Siempre el modal con todos los informes del estudiante
+      const informesEstudiante=informes.filter(
+        (info:any)=>info?.estudiante?.Carnet?.trim()===carnet.trim()
+
+      );
+      const modal=await this.modalctrl.create({
+        component:ModalArchivosEnviadosComponent,
+        componentProps:{
+          informes:informesEstudiante,
+          estudiante:nombreEstudiante
+        }
+      })
+      await modal.present()
+      //Actualiza icono de notificacion 
+      estudiante.tieneNotificacion=false
+      this.cargarInformesRecibidos()
+      this.mostrarImagen()//refrescar iconos de notificacion
     }
 }

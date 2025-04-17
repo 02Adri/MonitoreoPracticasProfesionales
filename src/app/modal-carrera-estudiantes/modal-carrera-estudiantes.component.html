@@ -20,7 +20,7 @@
 <ion-content>
   <ion-list *ngIf="estudiantes.length > 0">
    
-    <ion-item *ngFor="let estudiante of estudiantesFiltrados">
+    <ion-item *ngFor="let estudiante of estudiantesFiltrados" (click)="verInforme(estudiante)">
       <img
       [src]="estudiante.imagen"
        alt="icono de foto"
@@ -31,6 +31,13 @@
       <p>Carnet:{{estudiante.Carnet}}</p>
       <p>Telefono:{{estudiante.Telefono}}</p>
      </ion-label>
+     <!--Notificación si hay un nuevo informe-->
+     <ion-icon
+      *ngIf="estudiante.tieneNotificacion"
+      name="alert-circle-outline"
+      color="danger"
+      slot="start"
+     ></ion-icon>
     </ion-item>
   </ion-list>
   <div class="mensaje-vacio" *ngIf="estudiantesFiltrados.length === 0">
