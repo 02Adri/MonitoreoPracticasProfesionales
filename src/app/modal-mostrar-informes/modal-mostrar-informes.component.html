@@ -21,7 +21,7 @@
       <ion-item *ngFor="let informe of informes;let i = index" >
          <ion-label>
           <h2>{{informe.nombre}}</h2>
-          <p>{{informe.tipo}}</p>
+         
          </ion-label>
          <ion-button fill="clear" (click)="cambiarArchivos(i)">Cambiar el Archivo</ion-button>
           <ion-button color="danger" fill="clear" (click)="eliminarArchivo(i)">Eliminar</ion-button>

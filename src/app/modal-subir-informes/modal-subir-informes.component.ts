@@ -15,14 +15,15 @@ export class ModalSubirInformesComponent  implements OnInit {
    //variables para el modal
   private datosGuardados=this.loginEs.obtenerDatosLocalStorage()
    @Input() estudiante:any=this.datosGuardados;
-   archivos:{nombre:string; archivo:File}[]=[];
+   archivos:{nombre:string;archivo:File}[]=[];
   constructor(private loginEs:loginEstudianteService, private modalController:ModalController ) { }
 
   ngOnInit() {}
     //Manejar el evento de subida de archivos
     seleccionarArchivos(event:any) {
       const files=event.target.files;
-      if (files.length>0)
+         
+     if (files.length>0)
       {
         for(let i=0; i<files.length; i++){
               this.archivos.push({
@@ -37,8 +38,26 @@ export class ModalSubirInformesComponent  implements OnInit {
     //Guardar los archivos en el localStorage
     subirArchivos(){
       const key=`Informes_${this.estudiante.Estudiante.Correo}`;
-      let informesGuardados=JSON.parse(localStorage.getItem(key) || '[]');
-      informesGuardados=[...informesGuardados,...this.archivos];
+      const archivosProcesados:any[]=[]
+      const leerArchivo=(archivo:File)=>{
+        return new Promise((resolve,reject)=>{
+          const reader= new FileReader()
+          reader.onload=()=>{
+            resolve({
+               nombre:archivo.name,
+               tipo:archivo.type,
+               contenido:(reader.result as string).split(',')[1] //solo para base 64
+            })
+          }
+          reader.onerror=error=>reject(error)
+          reader.readAsDataURL(archivo)//convertir a base64
+        })
+      }
+      //convertimos todos los archivos en base64
+      Promise.all(this.archivos.map(a=>leerArchivo(a.archivo)))
+      .then((archivosConvertidos)=>{
+        let informesGuardados=JSON.parse(localStorage.getItem(key) || '[]');
+      informesGuardados=[...informesGuardados,...archivosConvertidos];
       localStorage.setItem(key,JSON.stringify(informesGuardados));
 
       Swal.fire({
@@ -55,6 +74,11 @@ export class ModalSubirInformesComponent  implements OnInit {
         backdrop:true,
       })
       this.modalController.dismiss();
+      })
+      .catch((error)=>{
+        console.error('Error al subir Archivos', error)
+      })
+      
     }
     cerrarModal(){
       this.modalController.dismiss();

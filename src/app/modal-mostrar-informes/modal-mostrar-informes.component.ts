@@ -147,6 +147,7 @@ export class ModalMostrarInformesComponent  implements OnInit {
 
     //Funcion para enviar informacion
     async enviarCorreo(informe:any){ 
+       
        //obtener el correo desde el localStorage
        this.coordinadores=this.coordinador
        const modal=await this.modalController.create({
@@ -233,9 +234,13 @@ export class ModalMostrarInformesComponent  implements OnInit {
          correoCoordinador: correoCoordinador,
           estudiante:estudianteData,
           informe:informe.nombre,
+          tipo:informe.tipo,
+          contenido:informe.contenido,//Es el contenido Base64
           fecha:new Date().toISOString(),
           leido:false,
        });
         localStorage.setItem('informesEnviados',JSON.stringify(nuevosInformes));
     }
+
+   
 }

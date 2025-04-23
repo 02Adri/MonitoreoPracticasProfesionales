@@ -10,3 +10,75 @@ ion-menu {
     gap: 10px;
   }
   
+  //Estilos de las cards en crear informes
+  .apps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px;
+  }
+  
+  .app-card {
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+  
+    ion-card-header {
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #ddd;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      padding: 12px 16px;
+    }
+  
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.2rem;
+      color: #2c3e50;
+    }
+  
+    .app-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 4px;
+    }
+  
+    ion-card-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 20px;
+    }
+  
+    canvas {
+      max-width: 180px;
+      max-height: 180px;
+      margin: 20px auto 10px auto;
+    }
+  
+    .porcentage {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #34495e;
+    }
+  
+    ion-button {
+      margin-top: 16px;
+      width: 45%;
+      font-weight: bold;
+      font-size: 1rem;
+      --border-radius: 12px;
+    }
+  }
+  

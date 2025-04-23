@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { carreraService } from '../services/CarreraService';
 import {ModalController,IonicModule} from '@ionic/angular'
-import{IonHeader,IonToolbar,IonTitle,IonButtons,IonButton,IonContent,IonItem,IonList,IonLabel,IonIcon,IonSearchbar} from '@ionic/angular/standalone'
+import{IonHeader,IonToolbar,IonTitle,IonButtons,IonButton,IonContent,IonItem,IonList,IonLabel,IonIcon,IonSearchbar,IonBadge} from '@ionic/angular/standalone'
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { close,alertCircleOutline } from 'ionicons/icons';
@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
   templateUrl: './modal-carrera-estudiantes.component.html',
   styleUrls: ['./modal-carrera-estudiantes.component.scss'],
   standalone: true,
-  imports:[IonicModule,IonHeader,IonToolbar,IonTitle,IonButtons,IonButton,IonContent,IonItem,IonList,IonLabel,IonIcon,CommonModule,IonSearchbar,FormsModule]
+  imports:[IonicModule,IonHeader,IonToolbar,IonTitle,IonButtons,IonButton,IonContent,IonItem,IonList,IonLabel,IonIcon,CommonModule,IonSearchbar,FormsModule,IonBadge]
 })
 export class ModalCarreraEstudiantesComponent  implements OnInit {
      estudiantes:any[]=[]
@@ -58,13 +58,14 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
         const carnet= est.Estudiante?.Carnet || est.Carnet
           
         //verificar si el estudiante tiene informe nuevo no leído
-        const tieneInformeNuevo=this.informesRecibidos.some((info:any)=>
+        const tieneInformeNuevo=this.informesRecibidos.filter((info:any)=>
              info.estudiante?.Carnet === carnet && !info.leido 
-        )
+        ).length;
         return{
           ...est,
           imagen:imagenGuardada || this.defaultImg,
-          tieneNotificacion:tieneInformeNuevo,
+          tieneNotificacion:tieneInformeNuevo>0,
+          totalInformesNuevos:tieneInformeNuevo,
           
         }
        })
@@ -116,6 +117,27 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
       
       info?.correoCoordinador===coordinador.Coordinador?.Correo
       )
+
+      //Buscar Informes no leidos
+      const informesNoLeidos=this.informesRecibidos.filter((info:any)=> !info.leido)
+        //obtener estudiantes ya notificados para evitar repetir
+        const notificados=JSON.parse(localStorage.getItem('notificadosPorAudio') || '[]')
+      informesNoLeidos.forEach(info=>{
+        const carnet=info?.estudiante?.Estudiante?.Carnet || info?.estudiante?.Carnet
+        const nombreEstudiante=info?.estudiante?.Estudiante?.Nombres_Apellidos || info?.estudiante?.Nombres_Apellidos
+
+        if(!notificados.includes(carnet)){
+           //reproducir el mensaje personalizado
+            const mensaje=`Tienes un nuevo informe enviado por  ${nombreEstudiante}`
+            this.reproducirMensaje(mensaje)
+            //marcar como ya notificados
+            notificados.push(carnet)
+
+        }
+      })
+      //Guardar estudiantes notificados para evitar repetir
+      localStorage.setItem('notificadosPorAudio',JSON.stringify(notificados))
+      
     }
     //funcion para marcar como leido el informe
     async verInforme(estudiante:any){
@@ -127,6 +149,31 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
       const carnet = estudiante.Estudiante?.Carnet || estudiante.Carnet;
       const correoCoordinador = coordinador?.Coordinador?.Correo;
        const nombreEstudiante=estudiante?.Estudiante?.Nombres_Apellidos ||estudiante?.Nombres_Apellidos
+
+         //Actualizar la lista de informes recibidos porque su estado es no leídos a leidos
+     const informeMostrado=informes
+     .slice()
+     .reverse()
+    .find((info:any)=>
+    info?.correoCoordinador?.trim()?.toLowerCase() === correoCoordinador?.trim()?.toLowerCase()&&
+    info?.estudiante?.Carnet?.trim() ===carnet?.trim() &&
+    !info.leido
+  );
+  if(informeMostrado){
+   
+    Swal.fire({
+      title:'Informe Recibido de' + estudiante.Nombres_Apellidos,
+      text:`El informe fue recibido correctamente ${informeMostrado.informe}`,
+      icon:'success',
+      confirmButtonText:'De acuerdo',
+      scrollbarPadding:false,
+      heightAuto:false,
+      customClass:{
+        popup:'custom-alert',
+      },
+      backdrop:true
+    })
+  }
         
        //marcar como leido el informe
       informes=informes.map((info:any)=>{
@@ -144,32 +191,16 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
         return info
       })
       localStorage.setItem('informesEnviados',JSON.stringify(informes))
-      //Actualizar la lista de informes recibidos
-     const informeMostrado=informes
-         .slice()
-         .reverse()
-        .find((info:any)=>
-        info?.correoCoordinador?.trim()?.toLowerCase() === correoCoordinador?.trim()?.toLowerCase()&&
-        info?.estudiante?.Carnet?.trim() ===carnet?.trim()
-      );
-      if(informeMostrado){
-       
-        Swal.fire({
-          title:'Informe Recibido de' + estudiante.Nombres_Apellidos,
-          text:`El informe fue recibido correctamente ${informeMostrado.informe}`,
-          icon:'success',
-          confirmButtonText:'De acuerdo',
-          scrollbarPadding:false,
-          heightAuto:false,
-          customClass:{
-            popup:'custom-alert',
-          },
-          backdrop:true
-        })
-      }
+       //remover del Local Storage cuando se lee
+       const notificados=JSON.parse(localStorage.getItem('notificadosPorAudio')||'[]')
+       const nuevoNotificados=notificados.filter((c:string)=>c !==carnet)
+       localStorage.setItem('notificadosPorAudio',JSON.stringify(nuevoNotificados))
       //mostrar Siempre el modal con todos los informes del estudiante
       const informesEstudiante=informes.filter(
-        (info:any)=>info?.estudiante?.Carnet?.trim()===carnet.trim()
+        (info:any)=>
+          info?.estudiante?.Carnet?.trim()===carnet.trim() &&
+          info?.correoCoordinador?.trim()?.toLowerCase() === correoCoordinador?.trim()?.toLowerCase()
+
 
       );
       const modal=await this.modalctrl.create({
@@ -184,5 +215,24 @@ export class ModalCarreraEstudiantesComponent  implements OnInit {
       estudiante.tieneNotificacion=false
       this.cargarInformesRecibidos()
       this.mostrarImagen()//refrescar iconos de notificacion
+    }
+
+    //Funcion para reproducir el mensaje
+    reproducirMensaje(mensaje:string){
+      const synth=window.speechSynthesis
+        //permite eliminar cualquier audio que se encuentra en cola
+        synth.cancel()
+      const utterance=new SpeechSynthesisUtterance(mensaje)
+      utterance.lang='es-ES'//español
+      utterance.rate=1//velocidad de la voz
+      utterance.pitch=1//tono de la voz
+
+      //Personalizar la voz
+      const voces=synth.getVoices()
+      const vozFemenina=voces.find(v=>v.lang==='es-ES' && v.name.toLowerCase().includes('female'))
+      if(vozFemenina){
+        utterance.voice=vozFemenina
+      }
+      synth.speak(utterance)
     }
 }

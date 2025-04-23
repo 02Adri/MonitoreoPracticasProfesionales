@@ -32,12 +32,14 @@
       <p>Telefono:{{estudiante.Telefono}}</p>
      </ion-label>
      <!--Notificación si hay un nuevo informe-->
-     <ion-icon
-      *ngIf="estudiante.tieneNotificacion"
-      name="alert-circle-outline"
+      <ion-badge
+      *ngIf="estudiante.totalInformesNuevos && estudiante.totalInformesNuevos>0"
       color="danger"
       slot="start"
-     ></ion-icon>
+      class="badge-notificacion"
+      >
+      {{estudiante.totalInformesNuevos}}
+    </ion-badge>
     </ion-item>
   </ion-list>
   <div class="mensaje-vacio" *ngIf="estudiantesFiltrados.length === 0">

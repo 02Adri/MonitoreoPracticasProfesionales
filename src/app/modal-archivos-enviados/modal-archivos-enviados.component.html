@@ -15,6 +15,9 @@
       <ion-label>{{informe.informe}}</ion-label>
       <p>Fecha:{{informe.fecha | date:'medium'}}</p> 
       <p>Estado:<strong [style.color]="informe.leido ? 'green':'red'">{{informe.leido ? 'Leído':'No leído'}}</strong></p>
+      <button size="small" fill="clear" (click)="descargarInforme(informe)">
+        <ion-icon slot="icon-only" name="download-outline"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 </ion-content>

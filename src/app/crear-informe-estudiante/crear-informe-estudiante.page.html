@@ -7,12 +7,12 @@
       </ion-header>
     </ion-toolbar>
     <ion-content class="ion-padding">
-      <ion-button color="warning" (click)="abrirModalSubirArchivos()" >
-        <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-button fill="clear" color="warning" (click)="abrirModalSubirArchivos()" >
+        <ion-icon  name="add-circle-outline"></ion-icon>
         Subir Informes
       </ion-button>
       <br>
-      <ion-button color="secondary" (click)="abrirModalMostrarArchivos()">
+      <ion-button fill="clear" color="secondary" (click)="abrirModalMostrarArchivos()">
         <ion-icon name="eye-outline"></ion-icon>
         Mostrar Informes
       </ion-button>
@@ -37,19 +37,26 @@
           <ion-title size="large">Crear-Informe-Estudiante</ion-title>
         </ion-toolbar>
       </ion-header>
-        <div class="buttons-container">
-          <ion-button expand="block" color="primary" 
-          (click)="openApp('com.microsoft.office.word','https://www.office.com/launch/word')">
-          <img src="assets/img/word.png">Microsoft Word
-        </ion-button>
-        <ion-button expand="block" color="success"
-         (click)="openApp('com.microsoft.office.excel','https://www.office.com/launch/excel')">
-         <img src="assets/img/excel.png">Microsoft Excel
-        </ion-button>
-        <ion-button expand="block" color="danger"
-         (click)="openApp('com.microsoft.office.powerpoint','https://www.office.com/launch/powerpoint')">
-         <img src="assets/img/powerpoint.png">Microsoft PowerPoint
-        </ion-button>
+        <div class="apps-container">
+          <ion-card *ngFor="let app of apps" class="app-card">
+           <ion-card-header>
+             <ion-card-title>
+              <img [src]="app.icon" alt="Icono de la app" class="app-icon"/>
+              {{app.name}}
+             </ion-card-title>
+           </ion-card-header>
+           <ion-card-content>
+            <div *ngIf="app.showChart">
+               <canvas baseChart
+                [data]="app.chartData"
+                [type]="'doughnut'"
+                [options]="chartOptions">
+              </canvas>
+              <div class="porcentaje">{{app.usage}}% de uso</div>
+            </div>
+            <ion-button size="small" [color]="app.color" (click)="openApp(app)"> Abrir {{app.name}}</ion-button>
+           </ion-card-content>
+          </ion-card>
         </div>
     </ion-content>
     
