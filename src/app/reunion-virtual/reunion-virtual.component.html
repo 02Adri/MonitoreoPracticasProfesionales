@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Espacio para Reuniones Virtuales...</ion-title>
+    <ion-buttons slot="start">
+     <ion-button (click)="closeModal()">
+       <ion-icon name="close-outline"></ion-icon>
+     </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="videos">
+   <video id="localVideo" autoplay muted playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+  </div>
+  <div class="controles">
+    <ion-button expand="block" color="success" *ngIf="mostrarBotonUnirse" (click)="unirseReunion()">Entrar a la Reunión</ion-button>
+    <ion-button expand="block" color="tertiary" (click)="compartirPantalla()">
+      <ion-icon name="desktop-outline"></ion-icon>
+      Compartir Pantalla
+    </ion-button>
+  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Enlace para compartir</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Puedes compartir este enlace a otros estudiantes</p>
+       <a [href]="enlaceReunion" target="_blank">{{enlaceReunion}}</a> 
+      <ion-button size="small" color="secondary" (click)="copiarLink()">Copiar Enlace</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item *ngFor="let msg of messages">{{msg}}</ion-item>
+  </ion-list>
+   <ion-input placeholder="Escribe un mensaje" [(ngModel)]="newMessage"></ion-input>
+   <ion-button size="small" color="primary" (click)="enviarMensaje()">Enviar</ion-button>
+</ion-content>

@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonBackButton,IonButton,IonMenu,IonApp,IonMenuButton } from '@ionic/angular/standalone';
-import { chevronBackOutline } from 'ionicons/icons';
+import { chevronBackOutline, eyeOutline, globeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { loginCoordinadorService } from '../services/InicioCoordinador';
 import { ModalCarreraComponent } from '../modal-carrera/modal-carrera.component';
 import {ModalController,IonicModule} from '@ionic/angular'
+import { ReunionVirtualComponent } from '../reunion-virtual/reunion-virtual.component';
+
 @Component({
   selector: 'app-informe-coordinador',
   templateUrl: './informe-coordinador.page.html',
@@ -17,7 +19,7 @@ import {ModalController,IonicModule} from '@ionic/angular'
 export class InformeCoordinadorPage implements OnInit {
 
   constructor(private inicioCoordinador:loginCoordinadorService,private modalctrl:ModalController) {
-    addIcons({chevronBackOutline})
+    addIcons({chevronBackOutline,eyeOutline,globeOutline})
    }
    private coordinador=this.inicioCoordinador.obtenerDatosLocalStorage()
     coordinadores:any=null
@@ -37,5 +39,14 @@ export class InformeCoordinadorPage implements OnInit {
         component:ModalCarreraComponent
       })
       return await modal.present()
+   }
+   //modal para crear la reunion
+   async openModalReunion(){
+     const modal= await this.modalctrl.create({
+      component:ReunionVirtualComponent,
+      cssClass:'modal-reunion',
+      backdropDismiss:false,
+    })
+    await modal.present()
    }
 }
