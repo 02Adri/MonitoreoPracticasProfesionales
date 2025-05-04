@@ -49,5 +49,9 @@ export const routes: Routes = [
     path: 'crear-informe-estudiante',
     loadComponent: () => import('./crear-informe-estudiante/crear-informe-estudiante.page').then( m => m.CrearInformeEstudiantePage)
   },
+  {
+    path: 'test-carreras',
+    loadComponent: () => import('./test-carreras/test-carreras.page').then( m => m.TestCarrerasPage)
+  },
 
 ];

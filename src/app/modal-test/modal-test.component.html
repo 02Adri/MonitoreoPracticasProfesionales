@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Test - {{carrera.nombre}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="preguntas.length">
+    <ion-progress-bar [value]="(indicePregunta+1)/preguntas.length" color="tertiary" class="animado"></ion-progress-bar>
+    <div class="pregunta-continer">
+      <h2>{{preguntas[indicePregunta].pregunta}}</h2>
+      
+      <ion-list>
+        <ion-item *ngFor="let opcion of preguntas[indicePregunta].opciones" (click)="seleccionar(opcion)" [class.seleccionado]="seleccion===opcion">
+          {{opcion}}
+        </ion-item>
+      </ion-list>
+      <ion-button size="small" [disabled]="!seleccion" (click)="siguiente()">Elegir</ion-button>
+    </div>
+  </ng-container>
+ 
+   
+</ion-content>

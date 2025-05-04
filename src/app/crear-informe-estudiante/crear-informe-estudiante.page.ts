@@ -5,13 +5,14 @@ import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonBackButton,Io
 import {AppLauncher} from '@capacitor/app-launcher'
 import {Platform} from '@ionic/angular'
 import { addIcons } from 'ionicons';
-import { chevronBackOutline,addCircleOutline,eyeOutline, home } from 'ionicons/icons';
+import { chevronBackOutline,addCircleOutline,eyeOutline, home,readerOutline } from 'ionicons/icons';
 import {loginEstudianteService} from '../services/InicioEstudiante'
 import { ModalMostrarInformesComponent } from '../modal-mostrar-informes/modal-mostrar-informes.component';
 import { ModalSubirInformesComponent } from '../modal-subir-informes/modal-subir-informes.component';
 import { ModalController,IonicModule} from '@ionic/angular';
 import {NgChartsModule} from 'ng2-charts';
-
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-crear-informe-estudiante',
   templateUrl: './crear-informe-estudiante.page.html',
@@ -20,19 +21,39 @@ import {NgChartsModule} from 'ng2-charts';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButtons,IonBackButton,IonButton,IonApp,IonMenu,IonMenuButton,IonIcon,IonicModule,NgChartsModule,IonCard,IonCardHeader,IonCardContent,IonCardTitle],
 })
 export class CrearInformeEstudiantePage implements OnInit {
-    private datosGuardados=this.loginEs.obtenerDatosLocalStorage()
+    
+  
+  private datosGuardados=this.loginEs.obtenerDatosLocalStorage()
     estudiante:any=this.datosGuardados;
     archivos:any[]=[];
-    constructor(private platform:Platform,private loginEs:loginEstudianteService,private modalController:ModalController) { 
-    addIcons({chevronBackOutline,addCircleOutline,eyeOutline})
+    constructor(private platform:Platform,private loginEs:loginEstudianteService,private modalController:ModalController,private router:Router) { 
+    addIcons({chevronBackOutline,addCircleOutline,eyeOutline,readerOutline})
   }
 
   ngOnInit() {
     this.graficoDatos()
   }
-   
-  
-
+   //Funcion para redirigir a la pagina de test
+        async redirigirTest(){
+           Swal.fire({
+            title:'Tests Profesionales',
+            text:'¿Deseas realizar un test profesional?',
+            icon:'question',
+            showCancelButton:true,
+            confirmButtonText:'Si, deseo realizarlo',
+            cancelButtonText:'No, cancelar',
+            scrollbarPadding:false,
+            heightAuto:false,
+            customClass:{
+              popup:'custom-alert',
+            },
+            backdrop:true
+           }).then((result)=>{
+            if(result.isConfirmed){
+              this.router.navigate(['/test-carreras'])
+            }
+           })
+        }
  //Abril modal para carga de archivos
  async abrirModalSubirArchivos(){
   const modal = await this.modalController.create({

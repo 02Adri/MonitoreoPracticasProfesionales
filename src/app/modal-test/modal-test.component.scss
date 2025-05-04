@@ -1,0 +1,35 @@
+.pregunta-container {
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  ion-item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+  }
+  
+  ion-item:hover {
+    background: #e0f7fa;
+  }
+  
+  .seleccionado {
+    background-color: #80deea !important;
+    font-weight: bold;
+  }
+  
+  .animado {
+    animation: progressAnim 1s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes progressAnim {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  

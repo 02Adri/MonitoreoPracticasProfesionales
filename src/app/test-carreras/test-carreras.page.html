@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/crear-informe-estudiante" text="volver" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>¡Explora tu Carrera!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+ <ion-grid>
+  <ion-row>
+    <ion-col size="12" size-md="6" *ngFor="let carrera of carreras">
+      <ion-card>
+        <img [src]="carrera.imagen" alt="{{carrera.nombre}}"/>
+        <ion-card-header>
+          <ion-card-title>{{carrera.nombre}}</ion-card-title>
+          <ion-card-subtitle>Tests Realizados:{{carrera.testsRealizados}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-button size="small" color="tertiary" (click)="iniciarTest(carrera)">Iniciar Test</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+ </ion-grid>
+</ion-content>
