@@ -8,6 +8,8 @@ import * as EmailJS from 'emailjs-com'
 import { loginCoordinadorService } from '../services/InicioCoordinador';
 import { ModalCorreoComponent } from '../modal-correo/modal-correo.component';
 import { verificarCorreo } from '../services/verificarCorreo';
+import { addIcons } from 'ionicons';
+import { folderOpenOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-modal-mostrar-informes',
   templateUrl: './modal-mostrar-informes.component.html',
@@ -29,7 +31,7 @@ export class ModalMostrarInformesComponent  implements OnInit {
     this.estudiante=this.loginEs.obtenerDatosLocalStorage()
     //obtenemos los datos del coordinador desde el localStorage
     //this.coordinadores=this.loginCoordinador.obtenerDatosLocalStorage()
-     
+     addIcons({folderOpenOutline})
    }
 
   ngOnInit() {}

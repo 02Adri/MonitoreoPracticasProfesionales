@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="header-toolbar">
     <ion-buttons slot="start"> 
       <ion-back-button defaultHref="/home" text="volver" icon="chevron-back-outline"></ion-back-button>
     </ion-buttons>
+    <ion-icon name="person-outline" slot="start" class="icono"></ion-icon>
     <ion-title>Registro del Coordinador</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,6 +16,7 @@
   </ion-header>
   <form  [formGroup]=" registroForm" (ngSubmit)="onSubmit()">
     <ion-item>
+      <ion-icon name="person-outline" slot="start"></ion-icon>
       <ion-label position="floating">Nombres y Apellidos</ion-label>
       <ion-input formControlName="Nombres_Apellidos" type="text"></ion-input>
     </ion-item>
@@ -22,6 +24,7 @@
       Nombres y Apellidos son obligatorios
     </p>
     <ion-item>
+      <ion-icon name="school-outline" slot="start"></ion-icon>
       <ion-label position="floating">Profesión</ion-label>
       <ion-input formControlName="Profesion" type="text"></ion-input>
     </ion-item>
@@ -29,6 +32,7 @@
       La profesión es obligatoria
     </p>
     <ion-item>
+      <ion-icon name="call-outline" slot="start"></ion-icon>
       <ion-label position="floating">Télefono</ion-label>
       <ion-input formControlName="Telefono" type="tel"></ion-input>
     </ion-item>
@@ -36,6 +40,7 @@
        El número de Télefono es obligatorio
     </p>
     <ion-item>
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
       <ion-label position="floating">Correo</ion-label>
       <ion-input formControlName="Correo" type="email"></ion-input>
     </ion-item>
@@ -43,6 +48,7 @@
        El correo es obligatorio
     </p>
     <ion-item>
+      <ion-icon name="card-outline" slot="start"></ion-icon>
       <ion-label position="floating">Carnet</ion-label>
       <ion-input formControlName="Carnet" type="text"></ion-input>
     </ion-item>

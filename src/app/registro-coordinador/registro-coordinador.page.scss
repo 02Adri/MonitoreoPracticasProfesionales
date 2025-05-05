@@ -1,17 +1,70 @@
-.error{
-    color:red;
-    font-size: 14px;
-    margin-left: 10px;
-}
 
-ion-item{
-    --border-radius:10px;
-    --background:#f4f4f4;
-}
-
-ion-button{
-    margin-top: 20px;
-    --border-radius:8px;
-    --background:#3880ff;
-}
-
+/*Estilos globales del Formulario para registrar el Estudiante*/
+ion-content{
+    --background:linear-gradient(135deg,#fdfcfb,#e2d1c3 100%);
+    animation:fadeIn 1.5s ease-in-out;
+    padding:1rem;
+  }
+  
+  form{
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    animation:slideUp 1.2s ease;
+  }
+  ion-item{
+    --highlight-color-focused:#673ab7;
+    border-radius: 12px;
+    margin-bottom:12px;
+  }
+  ion-label{
+    font-weight:bold;
+    font-size:0.95rem;
+    color:#4a148c;
+  }
+  ion-input,ion-select{
+    --padding-start:12px;
+    font-size: 1rem;
+  }
+  
+  
+  .error {
+      color: red;
+      font-size: 0.8rem;
+      margin: -10px 0 10px 10px;
+    }
+    
+    
+    ion-button {
+     
+     margin:1rem auto;
+     padding:0.6rem 1.5rem;
+     border-radius:12px;
+     --box-shadow:0 6px 20px rgba(103,58,183,0.4);
+     --background:linear-gradient(45deg,#7b1fa2,#512da8);
+     animation:popIn 1.4s ease-in-out;
+    }
+  
+    @keyframes fadeIn{
+      from{opacity:0;}
+      to{opacity:1;}
+    }
+  
+    @keyframes slideUp{
+      from{transform:translateY(50px);opacity:0;}
+      to{transform:translateY(0);opacity:1;}
+    }
+  
+    @keyframes popIn{
+      0%{transform:scale(0.9);opacity:0;}
+      100%{transform:scale(1);opacity:1;}
+    }
+    .header-toolbar {
+      --background: #404249;
+     
+      --color: rgb(252, 243, 243);
+    }
+    .icono{
+      font-size:60px;
+   }

@@ -34,13 +34,14 @@
   <!--Contenido fuera del menu-->
   <div class="main-content" id="main-content">
     <ion-header [translucent]="true">
-      <ion-toolbar>
+      <ion-toolbar class="header-toolbar">
         <ion-buttons slot="end">
          <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-buttons slot="start">
           <ion-back-button defaultHref="/login-estudiante" text="volver" icon="chevron-back-outline"></ion-back-button>
         </ion-buttons>
+        <ion-icon name="time-outline" slot="start" class="icono"></ion-icon>
         <ion-title>Hora de Entrada y Salida del Estudiante</ion-title>
       </ion-toolbar>
     </ion-header>

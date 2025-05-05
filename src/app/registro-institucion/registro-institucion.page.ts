@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup,ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonButton } from '@ionic/angular/standalone';
-import {chevronBackOutline} from 'ionicons/icons'
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonButton,IonIcon } from '@ionic/angular/standalone';
+import {callOutline, cardOutline, chevronBackOutline, mailOutline, personOutline, ribbonOutline, schoolOutline} from 'ionicons/icons'
 import { addIcons } from 'ionicons';
 import { InstitucionService } from '../services/InstitucionService';
 import Swal from 'sweetalert2';
@@ -11,12 +11,12 @@ import Swal from 'sweetalert2';
   templateUrl: './registro-institucion.page.html',
   styleUrls: ['./registro-institucion.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonButton,IonIcon]
 })
 export class RegistroInstitucionPage implements OnInit {
    registroForm!:FormGroup
   constructor(private fb:FormBuilder,private institucionService:InstitucionService) {
-    addIcons({chevronBackOutline})
+    addIcons({chevronBackOutline,personOutline,callOutline,cardOutline,mailOutline,ribbonOutline,schoolOutline})
    }
 
   ngOnInit() {

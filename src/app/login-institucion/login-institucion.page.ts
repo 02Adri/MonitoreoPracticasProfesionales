@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup,Validator,ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonItem,IonLabel,IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonItem,IonLabel,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent,IonIcon } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline, peopleCircleOutline, personAddOutline, personCircleOutline } from 'ionicons/icons';
+import { chevronBackOutline, mailOutline, peopleCircleOutline, personAddOutline, personCircleOutline } from 'ionicons/icons';
 import Swal from 'sweetalert2';
 import { loginInstitucionService } from '../services/InicioInstitucion'; 
 @Component({
@@ -12,12 +12,12 @@ import { loginInstitucionService } from '../services/InicioInstitucion';
   templateUrl: './login-institucion.page.html',
   styleUrls: ['./login-institucion.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButton,IonBackButton,IonButtons,IonItem,IonLabel,IonInput]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule,IonButton,IonBackButton,IonButtons,IonItem,IonLabel,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent,IonIcon]
 })
 export class LoginInstitucionPage implements OnInit {
      registroForm!:FormGroup
   constructor(private router:Router,private fb:FormBuilder, private loginIS:loginInstitucionService) {
-    addIcons({personAddOutline,personCircleOutline,peopleCircleOutline,chevronBackOutline})
+    addIcons({personAddOutline,personCircleOutline,peopleCircleOutline,chevronBackOutline,mailOutline})
    }
 
   ngOnInit() {

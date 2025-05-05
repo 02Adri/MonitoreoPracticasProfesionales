@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="header-toolbar">
-    <ion-buttons slot="start">
+   <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="volver" icon="chevron-back-outline"></ion-back-button>
     </ion-buttons>
+    <ion-icon name="school-outline" slot="start" class="icono"></ion-icon>
     <ion-title>Inicio de Sesión del Estudiante</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,6 +23,7 @@
       <ion-card-content>
         <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
           <ion-item>
+            <ion-icon name="person-circle-outline" slot="start"></ion-icon>
             <ion-label position="floating">Nombres y Apellidos</ion-label>
             <ion-input formControlName="Nombres_Apellidos" type="text"></ion-input>
           </ion-item>
@@ -29,6 +31,7 @@
             Para iniciar Sesión el nombre y el apellido son obligatorios
           </p>
           <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
             <ion-label position="floating">Correo Electrónico</ion-label>
             <ion-input formControlName="Correo" type="email"></ion-input>
           </ion-item>

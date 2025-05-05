@@ -2,21 +2,25 @@ import { Component, Input, OnInit } from '@angular/core';
 import { loginEstudianteService } from '../services/InicioEstudiante'; 
 import Swal from 'sweetalert2';
 import {ModalController,IonicModule} from '@ionic/angular'
-import {IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonButtons} from '@ionic/angular/standalone';
+import {IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonButtons,IonIcon} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { folderOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-modal-subir-informes',
   templateUrl: './modal-subir-informes.component.html',
   styleUrls: ['./modal-subir-informes.component.scss'],
   standalone: true,
-  imports:[IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonButtons,CommonModule,IonicModule]
+  imports:[IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonButtons,CommonModule,IonicModule,IonIcon]
 })
 export class ModalSubirInformesComponent  implements OnInit {
    //variables para el modal
   private datosGuardados=this.loginEs.obtenerDatosLocalStorage()
    @Input() estudiante:any=this.datosGuardados;
    archivos:{nombre:string;archivo:File}[]=[];
-  constructor(private loginEs:loginEstudianteService, private modalController:ModalController ) { }
+  constructor(private loginEs:loginEstudianteService, private modalController:ModalController ) { 
+    addIcons({folderOutline})
+  }
 
   ngOnInit() {}
     //Manejar el evento de subida de archivos

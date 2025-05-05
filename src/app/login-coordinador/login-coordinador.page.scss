@@ -28,7 +28,7 @@
   
   // Cabecera de la tarjeta
   ion-card-header {
-    background: #22d412;
+    background:  #404249;
     color: white;
     text-align: center;
     padding: 20px;
@@ -37,12 +37,14 @@
   ion-card-title {
     font-size: 22px;
     font-weight: bold;
+    color:white;
   }
   
   ion-card-subtitle {
     font-size: 16px;
     opacity: 0.8;
     font-weight: bold;
+    color:white;
   }
   
   // Estilos de los campos de entrada
@@ -79,9 +81,12 @@
   
   // Barra superior
   .header-toolbar {
-    --background: #22d412;
+    --background: #404249;
    
-    --color: rgb(10, 10, 10);
+    --color: rgb(252, 243, 243);
   }
+  .icono{
+    font-size:60px;
+ }
   
 

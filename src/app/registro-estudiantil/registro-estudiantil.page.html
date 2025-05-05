@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="header-toolbar">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="volver" icon="chevron-back-outline"></ion-back-button>
     </ion-buttons>
+    <ion-icon name="school-outline" slot="start" class="icono"></ion-icon>
     <ion-title>Registro del Estudiante</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,6 +17,7 @@
   </ion-header>
   <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
     <ion-item>
+      <ion-icon name="person-outline" slot="start"></ion-icon>
       <ion-label position="floating">Nombres y Apellidos Completos</ion-label>
       <ion-input formControlName="Nombres_Apellidos" type="text"></ion-input>
     </ion-item>
@@ -23,6 +25,7 @@
       Nombres y Apellidos son Obligatorio
     </p>
     <ion-item>
+      <ion-icon name="card-outline" slot="start"></ion-icon>
      <ion-label position="floating">Número de Carnet</ion-label>
      <ion-input formControlName="Carnet" type="text"></ion-input>
     </ion-item>
@@ -30,6 +33,7 @@
       El Número de Carnet es obligatorio 
     </p>
     <ion-item>
+      <ion-icon name="school-outline" slot="start"></ion-icon>
       <ion-label position="floating">Tipo de Carrera </ion-label>
       <ion-select formControlName="Carrera" placeholder="Seleccione el tipo de Carrera que estudia">
         <ion-select-option *ngFor="let Carrera of Carreras" [value]="Carrera">
@@ -41,6 +45,7 @@
       Seleccionar el Tipo de Carrera es obligatorio
      </p>
      <ion-item>
+      <ion-icon name="call-outline" slot="start"></ion-icon>
       <ion-label position="floating">Teléfono</ion-label>
       <ion-input formControlName="Telefono" type="tel"></ion-input>
      </ion-item>
@@ -48,6 +53,7 @@
        El Telefono es obligatorio
      </p>
      <ion-item>
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
       <ion-label position="floating">Correo</ion-label>
       <ion-input formControlName="Correo" type="email"></ion-input>
      </ion-item>
@@ -56,6 +62,7 @@
      </p>
     
      <ion-item>
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
       <ion-label position="floating">Año Académico</ion-label>
       <ion-input formControlName="Anio_Academico" type="number"></ion-input>
      </ion-item>

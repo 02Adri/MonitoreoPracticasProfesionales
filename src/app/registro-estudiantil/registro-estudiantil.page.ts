@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormBuilder,FormGroup,Validators,ReactiveFormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonSelect,IonSelectOption,IonButton } from '@ionic/angular/standalone';
-import {chevronBackOutline} from 'ionicons/icons'
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonSelect,IonSelectOption,IonButton,IonIcon } from '@ionic/angular/standalone';
+import {calendarOutline, callOutline, cardOutline, chevronBackOutline, mailOutline, personOutline, schoolOutline} from 'ionicons/icons'
 import { addIcons } from 'ionicons';
 import axios from 'axios'
 import Swal from 'sweetalert2';
@@ -12,14 +12,14 @@ import { EstudianteService } from '../services/EstudianteService';
   templateUrl: './registro-estudiantil.page.html',
   styleUrls: ['./registro-estudiantil.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule,ReactiveFormsModule ,FormsModule,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonSelect,IonSelectOption,IonButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule,ReactiveFormsModule ,FormsModule,IonButtons,IonBackButton,IonItem,IonLabel,IonInput,IonSelect,IonSelectOption,IonButton,IonIcon]
 })
 export class RegistroEstudiantilPage implements OnInit {
      registroForm!:FormGroup;
      Carreras:string[]=['Ingeniería en Sistemas de la Información','Contaduría Pública y Finanzas','Adminstración de Empresas','Enfermería','Psicología','Veterinaría','Agroecología','Trabajo Social','Inglés'];
 
   constructor(private fb:FormBuilder,private estudianteService:EstudianteService) {
-     addIcons({chevronBackOutline})
+     addIcons({chevronBackOutline,personOutline,cardOutline,schoolOutline,callOutline,mailOutline,calendarOutline})
     
    }
    ngOnInit() {

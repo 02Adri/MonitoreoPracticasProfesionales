@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup,ReactiveFormsModule,FormBuilder, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonLabel,IonItem,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonBackButton,IonButtons,IonLabel,IonItem,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent,IonIcon } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline, peopleCircleOutline,personAddOutline,personCircleOutline } from 'ionicons/icons';
+import { chevronBackOutline, mailOutline, peopleCircleOutline,personAddOutline,personCircleOutline } from 'ionicons/icons';
 import Swal from 'sweetalert2';
 import { loginCoordinadorService } from '../services/InicioCoordinador';
 @Component({
@@ -12,12 +12,12 @@ import { loginCoordinadorService } from '../services/InicioCoordinador';
   templateUrl: './login-coordinador.page.html',
   styleUrls: ['./login-coordinador.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButton,IonBackButton,IonButtons,ReactiveFormsModule,IonLabel,IonInput,IonItem, IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButton,IonBackButton,IonButtons,ReactiveFormsModule,IonLabel,IonInput,IonItem, IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent,IonIcon]
 })
 export class LoginCoordinadorPage implements OnInit {
     registroForm!:FormGroup
   constructor(private router:Router, private fb:FormBuilder,private loginCS:loginCoordinadorService){ 
-    addIcons({personAddOutline,personCircleOutline,peopleCircleOutline,chevronBackOutline})
+    addIcons({personAddOutline,personCircleOutline,peopleCircleOutline,chevronBackOutline,mailOutline})
   }
 
   ngOnInit() {
