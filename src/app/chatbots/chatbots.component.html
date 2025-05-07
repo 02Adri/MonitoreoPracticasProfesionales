@@ -1,0 +1,27 @@
+<ion-card class="chat-container">
+  <ion-card-header>
+    <ion-card-title>¡Asistente Virtual a tu alcance...!</ion-card-title>
+    <ion-card-subtitle>Monitoreo de prácticas profesionales</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content class="chat-content">
+    <div *ngFor="let message of messages">
+      <div [ngClass]="{'user-msg':message.sender==='user','bot-msg':message.sender==='bot'}">
+        <strong>{{message.sender==='user'?'Tú':'Asistente'}}</strong>
+        <img [src]="message.sender==='user'?'assets/img/perfil-removebg-preview.png':'assets/img/bot-removebg-preview.png'" alt="User" class="avatar" />
+        <p class="message-buble">{{message.text}}</p>
+      </div>
+    </div>
+    <div *ngIf="loading" class="bot-msg loading">
+      <strong>Asistente</strong><p>Escribiendo...</p>
+    </div>
+  </ion-card-content>
+  <div class="input-area">
+    <ion-input [(ngModel)]="userInput" placeholder="Escribe tu pregunta..." class="input-chat"></ion-input>
+    <ion-button (click)="sendMessage()" [disabled]="loading || !userInput.trim()" fill="clear">
+      <ion-icon name="send-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="clearChat()" fill="clear" color="danger">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-card>

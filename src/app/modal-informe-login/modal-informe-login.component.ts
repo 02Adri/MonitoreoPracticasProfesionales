@@ -4,18 +4,23 @@ import { Router } from '@angular/router';
 import { FormsModule,FormGroup,FormBuilder,ReactiveFormsModule,Validator, Validators } from '@angular/forms';
 import { informeEstudianteService } from '../services/informeEstudiante';
 import Swal from 'sweetalert2';
-import {IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonItem,IonLabel,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent } from '@ionic/angular/standalone';
+import {IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonItem,IonLabel,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent,IonIcon } from '@ionic/angular/standalone';
 import {ModalController,IonicModule} from '@ionic/angular'
+import { addIcons } from 'ionicons';
+import { idCardOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-modal-informe-login',
   templateUrl: './modal-informe-login.component.html',
   styleUrls: ['./modal-informe-login.component.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule,ReactiveFormsModule,IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonItem,IonLabel,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent,IonicModule ]
+  imports: [ CommonModule, FormsModule,ReactiveFormsModule,IonHeader,IonContent,IonTitle,IonToolbar,IonButton,IonItem,IonLabel,IonInput,IonCard,IonCardHeader,IonCardTitle,IonCardSubtitle,IonCardContent,IonicModule,IonIcon ]
 })
 export class ModalInformeLoginComponent  implements OnInit {
      informeForm!:FormGroup
-  constructor(private router:Router, private fb:FormBuilder, private informeEs:informeEstudianteService,private modalController:ModalController) { }
+  constructor(private router:Router, private fb:FormBuilder, private informeEs:informeEstudianteService,private modalController:ModalController) {
+     
+    addIcons({idCardOutline})
+   }
 
   ngOnInit() {
     this.informeForm=this.fb.group({
