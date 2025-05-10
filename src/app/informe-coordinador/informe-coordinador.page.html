@@ -19,28 +19,46 @@
 
   <div class="main-content" id="main-content">
     <ion-header [translucent]="true">
-      <ion-toolbar>
+      <ion-toolbar class="header-toolbar" >
         <ion-buttons slot="end">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-buttons>
           <ion-back-button defaultHref="/login-coordinador" text="volver" icon="chevron-back-outline"></ion-back-button>
         </ion-buttons>
-        <ion-title>Informes del Coordinador</ion-title>
+        <ion-icon name="id-card-outline" slot="start" class="icono"></ion-icon>
+        <ion-title>Información General del Coordinador</ion-title>
       </ion-toolbar>
     </ion-header>
     
-    <ion-content [fullscreen]="true">
+    <ion-content [fullscreen]="true" class="page-content">
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Informe-Coordinador</ion-title>
         </ion-toolbar>
       </ion-header>
-      <div *ngIf="coordinadores">
-        <h1>Bienvenido o Bienvenida, {{coordinadores.Coordinador.Nombres_Apellidos}}</h1>
-        <p>Correo:{{coordinadores.Coordinador.Correo}}</p>
-        <p>Profesión:{{coordinadores.Coordinador.Profesion}}</p>
+     
+      <div  class="coordinador-info" *ngIf="coordinadores">
+          <div class="foto-container">
+          <img
+          [src]="perfilImg ||defaultImagen"
+          alt="foto de perfil"
+          class="foto-perfil"
+          (click)="abrirExplorador()"
+          />
+          <input
+           type="file"
+           accept="image/*"
+           (change)="seleccionarImagen($event)"
+           #inputArchivo
+           hidden
+          />
+       </div>
+        <h2> 👨‍🏫Bienvenido o Bienvenida, {{coordinadores.Coordinador.Nombres_Apellidos}}</h2>
+        <p><ion-icon name="mail-outline" slot="start" class="icono_page"></ion-icon>Correo:{{coordinadores.Coordinador.Correo}}</p>
+        <p><ion-icon name="ribbon-outline" slot="start" class="icono_page"></ion-icon>Profesión:{{coordinadores.Coordinador.Profesion}}</p>
       </div>
+      <app-agendar-visitas></app-agendar-visitas>
     </ion-content>
   </div>
 </ion-app>

@@ -52,7 +52,9 @@
           <ion-title size="large"></ion-title>
         </ion-toolbar>
       </ion-header>
-      <div class="foto-container">
+      
+      <div *ngIf="estudiante" class="estudiante-info">
+        <div class="foto-container">
         <img
         [src]="perfilImg || defaultImagen"
         alt="Foto de perfil"
@@ -67,10 +69,9 @@
             hidden
         />
       </div>
-      <div *ngIf="estudiante">
-        <h2>Bienvenida o Bienvenido,{{estudiante.Estudiante.Nombres_Apellidos}}</h2>
-        <p>Correo:{{estudiante.Estudiante.Correo}}</p>
-        <p>Nº de Carnet:{{estudiante.Estudiante.Carnet}}</p>
+        <h2><ion-icon name="person-circle" slot="start" class="icono_2"></ion-icon>Bienvenida o Bienvenido,{{estudiante.Estudiante.Nombres_Apellidos}}</h2>
+        <p><ion-icon name="mail-outline" slot="start" class="icono_2"></ion-icon>Correo:{{estudiante.Estudiante.Correo}}</p>
+        <p><ion-icon name="id-card-outline" slot="start" class="icono_2"></ion-icon>Nº de Carnet:{{estudiante.Estudiante.Carnet}}</p>
       </div>
      
       <div *ngIf="!estudiante">

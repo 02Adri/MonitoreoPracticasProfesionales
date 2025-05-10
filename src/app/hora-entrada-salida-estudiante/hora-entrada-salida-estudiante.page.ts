@@ -9,7 +9,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { loginEstudianteService } from '../services/InicioEstudiante';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline,personCircle } from 'ionicons/icons';
+import { chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline,personCircle, idCardOutline, mailOutline } from 'ionicons/icons';
 import { ModalExcelComponent } from '../modal-excel/modal-excel.component';
 import {ModalController,IonicModule,PopoverController} from '@ionic/angular'
 import { PopoverMensajeComponent } from '../popover-mensaje/popover-mensaje.component';
@@ -41,7 +41,7 @@ export class HoraEntradaSalidaEstudiantePage implements OnInit {
        @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>
        perfilImg:string|null=null//imagen de perfil
        constructor(private router:Router,private loginES:loginEstudianteService,private modalCtrl:ModalController,private popoverCtrl:PopoverController) { 
-        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline,personCircle})
+        addIcons({chevronBackOutline,eyeOutline,enterOutline,exitOutline,timeOutline,informationCircleOutline,personCircle,idCardOutline,mailOutline})
         this.estudiante=this.datosGuardados
           //cargar horas almacenadas previamente al iniciar la aplicacion
           const horasGuardadas=localStorage.getItem(`totalHoras_${this.estudiante.Estudiante.Correo}`)
