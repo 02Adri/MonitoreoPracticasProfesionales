@@ -1,21 +1,37 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="header-toolbar">
     <ion-buttons>
       <ion-back-button defaultHref="login-institucion" text="volver" icon="chevron-back-outline"></ion-back-button>
     </ion-buttons>
-    <ion-title>Informes enviados a la Institucion</ion-title>
+      <ion-icon name="Id-card-outline" slot="start" class="icono"></ion-icon>
+    <ion-title>Información General de la Institución</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Informe enviado a la Institucion</ion-title>
+      <ion-title size="large"></ion-title>
     </ion-toolbar>
   </ion-header>
-  <div *ngIf="instituciones">
-   <h1>Bienvenido o Bienvenida,{{instituciones.Institucion.Nombres_Apellidos}}</h1>
-   <p>Correo:{{instituciones.Institucion.Correo}}</p>
-   <p>Institucion:{{instituciones.Institucion.Nombre_Institucion}}</p>
+  <div *ngIf="instituciones" class="instituciones-info">
+    <div class="foto-container">
+          <img
+          [src]="perfilImg ||defaultImagen"
+          alt="foto de perfil"
+          class="foto-perfil"
+          (click)="abrirExplorador()"
+          />
+          <input
+           type="file"
+           accept="image/*"
+           (change)="seleccionarImagen($event)"
+           #inputArchivo
+           hidden
+          />
+       </div>
+   <h2>👨‍🏫Bienvenido o Bienvenida,{{instituciones.Institucion.Nombres_Apellidos}}</h2>
+   <p><ion-icon name="mail-outline" slot="start" class="icono_page"></ion-icon>Correo:{{instituciones.Institucion.Correo}}</p>
+   <p><ion-icon name="ribbon-outline" slot="start" class="icono_page"></ion-icon>Institucion:{{instituciones.Institucion.Nombre_Institucion}}</p>
   </div>
 </ion-content>

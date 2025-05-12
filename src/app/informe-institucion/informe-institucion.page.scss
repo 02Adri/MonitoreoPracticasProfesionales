@@ -1,0 +1,54 @@
+.main-content{
+  background:linear-gradient(135deg, #e3f2fd,#fce4ec);
+ height: 90%;
+}
+  
+.instituciones-info{
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  h2{
+    font-size: 1.6em;
+    color: #1e88e5;
+    margin-bottom: 6px;
+  }
+  p{
+    margin: 4px 0;
+    font-size: 1em;
+    color: #444;
+  }
+}
+//Estilos de la imagen de perfil
+.foto-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foto-perfil {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #3880ff;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.foto-perfil:hover {
+  transform: scale(1.05);
+}
+
+.icono_page{
+  font-size: 26px;
+ }
+ .header-toolbar{
+    --background:#1E3A5F;
+    --color:#fffffff5;
+}
+.icono{
+   font-size:60px;
+}

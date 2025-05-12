@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon slot="start" name="document-attach-outline" class="icono"></ion-icon>
+    <ion-title>Carta de Prácticas Profesionales</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Generar Carta de Prácticas</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card-content>
+    <ion-item>
+      <ion-icon name="person-circle-outline" slot="start" class="icono_page"></ion-icon>
+      <ion-label position="floating">Nombre del Estudiante</ion-label>
+      <ion-input [(ngModel)]="datos.nombre"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-icon name="id-card-outline" slot="start" class="icono_page"></ion-icon>
+      <ion-label position="floating">Nº Carnet</ion-label>
+      <ion-input [(ngModel)]="datos.carnet"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-icon name="school-outline" slot="start" class="icono_page"></ion-icon>
+      <ion-label position="floating">Carrera</ion-label>
+      <ion-input [(ngModel)]="datos.carrera"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-icon name="school-outline" slot="start" class="icono_page"></ion-icon>
+      <ion-label position="floating">Nombre de la universidad</ion-label>
+      <ion-input [(ngModel)]="datos.universidad"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-icon name="person-circle-outline" slot="start" class="icono_page"></ion-icon>
+      <ion-label position="floating">Nombre del Tutor</ion-label>
+      <ion-input [(ngModel)]="datos.tutor"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item lines="none">
+      <ion-icon name="file-tray-full-outline" slot="start" class="icono_page"></ion-icon>
+      <ion-label > logo de la Universidad</ion-label>
+      <ion-input type="file" (change)="onFileChange($event,'logo')" #logoInput></ion-input>
+    </ion-item>
+    <br>
+     <ion-item lines="none">
+      <ion-icon name="file-tray-full-outline" slot="start" class="icono_page"></ion-icon>
+      <ion-label > Firma Electrónica</ion-label>
+      <ion-input type="file" (change)="onFileChange($event,'firma')" #firmaInput></ion-input>
+    </ion-item>
+    <br>
+    <ion-button size="small" color="tertiary" (click)="generarCarta()">
+      <ion-icon name="save-outline" slot="start" class="icono_page"></ion-icon>
+      Generar Carta
+    </ion-button>
+  </ion-card-content>
+</ion-content>

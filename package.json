@@ -40,6 +40,7 @@
     "file-saver": "^2.0.5",
     "ionicons": "^7.0.0",
     "ng2-charts": "^4.0.1",
+    "pdfmake": "^0.2.20",
     "rxjs": "~7.8.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
