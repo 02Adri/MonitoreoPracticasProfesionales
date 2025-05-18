@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    Evaluar a {{estudiante.Estudiante?.Nombres_Apellidos || estudiante.Nombres_Apellidos}}
+  <ion-buttons slot="end">
+    <ion-button (click)="dismiss()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form>
+    <div *ngFor="let pregunta of preguntas; let i=index" class="pregunta-evaluacion">
+      <label>{{pregunta.texto}}</label>
+      <ion-range [(ngModel)]="respuestas[i]" name="rango{{i}}" min="0" max="10" step="1" snaps="true" pin="true">
+
+      </ion-range>
+      <p>valor:{{respuestas[i]}}</p>
+    </div>
+    <ion-item>
+      <ion-label position="stacked">Observaciones</ion-label>
+      <ion-textarea [(ngModel)]="observaciones" name="observaciones" placeholder="Escribe tus observaciones..."></ion-textarea>
+    </ion-item>
+
+    <div class="botones-evaluacion">
+     <ion-button size="small" color="primary" (click)="generarGrafico()">📊 Ver Gráfico</ion-button>
+     <ion-button size="small" color="danger" (click)="generarPDF()">📄 Generar PDF</ion-button>
+  </div>
+  <canvas id="graficoEvaluacion"  width="300" height="200"></canvas>
+  </form>
+</ion-content>

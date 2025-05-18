@@ -52,3 +52,195 @@
 .icono{
    font-size:60px;
 }
+
+/*Estilos de las Cards*/
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.info-card {
+  width: 300px;
+  max-width: 90vw;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  background: linear-gradient(to bottom right, #fdfdfd, #f1f1f1);
+  animation: fadeInScale 0.5s ease forwards;
+
+  ion-card-header {
+   --background:#1E3A5F;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    
+  }
+  ion-card-title{
+   --color:#fffffff5;
+  }
+
+  ion-card-content {
+    font-size: 0.95rem;
+    --color:#fffffff5;
+    padding: 1rem;
+    text-align: justify;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+ion-textarea {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: rgb(238, 223, 223);
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+ion-button {
+  --background: #3dc2ff;
+  --background-hover: #38bdf8;
+  --background-activated: #0ea5e9;
+  --color: #fff;
+  --border-radius: 15px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --box-shadow: 0 4px 12px rgba(61, 194, 255, 0.5);
+  margin-top: 1rem;
+  animation: fadeInScale 0.4s ease-in-out;
+  font-weight: bold;
+  font-size: 0.95rem;
+  text-transform: none;
+  height:50px;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+/*Estilos de la barra de busqueda*/
+/* Estilos generales para centrar y limitar el contenido */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Estilos de la barra de búsqueda */
+.barra-busqueda {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+  --background: #ffffff;
+  --color: #333;
+  --placeholder-color: #999;
+  --border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-in-out;
+  border: 1px solid #ddd;
+}
+
+/* Animación de entrada suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Diseño de cada item de estudiante */
+ion-item {
+  --background: #ffffff;
+  border-radius: 14px;
+  margin: 0.75rem auto;
+  width: 95%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+ion-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar más grande y redondo */
+ion-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #2196f3;
+}
+
+/* Textos dentro del estudiante */
+ion-label h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+ion-label p {
+  margin: 2px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Mensajes de estado */
+.mensaje-inicial,
+.mensaje-vacio {
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  font-size: 1rem;
+  color: #444;
+  background: #f8f9fa;
+  border: 1px dashed #ccc;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Responsive design */
+@media screen and (max-width: 600px) {
+  .barra-busqueda {
+    max-width: 90%;
+  }
+
+  ion-item {
+    width: 100%;
+  }
+
+  .mensaje-inicial,
+  .mensaje-vacio {
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+}
+
+

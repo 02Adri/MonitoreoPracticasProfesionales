@@ -1,0 +1,21 @@
+ion-range {
+  margin-bottom: 0.5rem;
+}
+
+.pregunta-evaluacion {
+  margin-bottom: 1rem;
+}
+
+.botones-evaluacion {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+canvas {
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

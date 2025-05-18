@@ -33,5 +33,70 @@
    <h2>👨‍🏫Bienvenido o Bienvenida,{{instituciones.Institucion.Nombres_Apellidos}}</h2>
    <p><ion-icon name="mail-outline" slot="start" class="icono_page"></ion-icon>Correo:{{instituciones.Institucion.Correo}}</p>
    <p><ion-icon name="ribbon-outline" slot="start" class="icono_page"></ion-icon>Institucion:{{instituciones.Institucion.Nombre_Institucion}}</p>
-  </div>
+  
+    <!--Estructura de Misión y Visión de la Institución-->
+    <div *ngIf="!yaRegistrado" class="card-container form-container">
+      <ion-card class="info-card">
+        <ion-card-header>
+          <ion-card-title>Ingresar Misión de la Institución</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-textarea rows="4" placeholder="Escribe la mision..." [(ngModel)]="mision" ></ion-textarea>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="info-card">
+        <ion-card-header>
+          <ion-card-title>Ingrese la Visión de la Institución</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-textarea rows="4" placeholder="Escribe la visión..." [(ngModel)]="vision"></ion-textarea>
+        </ion-card-content>
+      </ion-card>
+      <ion-button (click)="guardarMisionVision()">Guardar</ion-button>
+    </div>
+    <div *ngIf="yaRegistrado" class="card-container">
+     <ion-card class="info-card animate">
+      <ion-card-header>
+        <ion-card-title>Misión</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{mision}}</p>
+      </ion-card-content> 
+    </ion-card>
+    <ion-card class="info-card animate">
+      <ion-card-header>
+        <ion-card-title>Visión</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+     {{vision}}
+      </ion-card-content>
+    </ion-card>
+    </div>
+     <!--Estructura de la barra de búsqueda-->
+      <div class="page-container">
+     <ion-searchbar [(ngModel)]="busqueda" (ionInput)="filtrarEstudiantes()" placeholder="Buscar estudiante por Nombre" class="barra-busqueda"></ion-searchbar>
+      <ion-card *ngIf="busqueda.trim() ===''">
+       <ion-card-content class="mensaje-inicial">
+         🔍 Escribe el nombre del estudiante para comenzar la búsqueda
+        </ion-card-content> 
+      </ion-card> 
+     <ion-list *ngIf="busqueda.trim() && estudianteFiltrados.length >0">
+        <ion-item *ngFor="let est of estudianteFiltrados" (click)="abrirModalEvaluacion(est)">
+          <ion-avatar slot="start">
+            <img [src]="obtenerImagen(est)"/>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{est.Estudiante?.Nombres_Apellidos || est.Nombres_Apellidos}}</h2>
+            <p>{{est.Estudiante?.Correo || est.Correo}}</p>
+            <p>{{est.Estudiante?.Carnet || est.Carnet}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-card *ngIf="busqueda.trim() && estudianteFiltrados.length===0">
+        <ion-card-content class="mensaje-vacio">
+             ❌No se rencontraron resultados...
+        </ion-card-content>
+      </ion-card>
+      </div>
+    </div>
 </ion-content>
