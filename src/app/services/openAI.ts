@@ -7,7 +7,7 @@ import axios from 'axios'
 
 export class OpenAIService{
 /*Api Key */
-private apiKey='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';
+private apiKey='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';
 async sendMessage(message:string):Promise<string>{
     try {
         const response=await axios.post(

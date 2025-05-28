@@ -2,19 +2,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { IonHeader, IonToolbar, IonTitle, IonContent,IonButton,IonIcon, IonFooter } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import{heart,happy,personAddOutline,personCircleOutline,peopleCircleOutline,logInOutline} from 'ionicons/icons'
+import{heart,happy,personAddOutline,personCircleOutline,peopleCircleOutline,logInOutline,layersOutline} from 'ionicons/icons'
 import { Router } from '@angular/router';
 import  Swal  from 'sweetalert2'
 import { ChatbotsComponent } from '../chatbots/chatbots.component';
+import { ModalInstructivoComponent } from '../modal-instructivo/modal-instructivo.component';
+import {ModalController,IonicModule}from '@ionic/angular'
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonFooter, IonHeader, IonToolbar, IonTitle, IonContent,IonButton,IonIcon,CommonModule,ChatbotsComponent],
+  imports: [IonFooter, IonHeader, IonToolbar, IonTitle, IonContent,IonButton,IonIcon,CommonModule,ChatbotsComponent,IonicModule],
 })
 export class HomePage {
-  constructor(private router:Router) {
-    addIcons({heart,happy,personAddOutline,personCircleOutline,peopleCircleOutline,logInOutline})
+  constructor(private router:Router, private modalCtrl:ModalController) {
+    addIcons({heart,happy,personAddOutline,personCircleOutline,peopleCircleOutline,logInOutline,layersOutline})
   }
 
   //Muestra el desplegable de login
@@ -165,6 +167,12 @@ export class HomePage {
               }
             })
            }
-           
+           //Funcion para mostrar instructivo
+           async mostrarInstructivo(){
+             const modal= await this.modalCtrl.create({
+              component:ModalInstructivoComponent
+             })
+             await modal.present()
+           }  
         
 }

@@ -1,0 +1,49 @@
+<ion-header  class="modal-header">
+  <ion-toolbar color="primary">
+    <ion-title>📘 Instructivo de Uso de PaceBlocks</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+ <div class="svg-container">
+  <!--Animacion SVG educativo-->
+    <svg class="educacion-svg" viewBox="0 0 64 64" width="180" height="180">
+      <g fill="none" stroke-width="2">
+         <rect x="10" y="20" width="44" height="30" rx="3" fill="#4caf50" stroke="#388e3c"/>
+        <path d="M32 10 L42 20 H22 Z" fill="#81c784" stroke="#2e7d32">
+          <animate attributeName="d" dur="2s" repeatCount="indefinite"
+            values="M32 10 L42 20 H22 Z; M32 12 L44 22 H20 Z; M32 10 L42 20 H22 Z"/>
+        </path>
+        <line x1="20" y1="28" x2="44" y2="28" stroke="#fff">
+          <animate attributeName="x2" values="44;20;44" dur="1.5s" repeatCount="indefinite"/>
+        </line>
+      </g>
+    </svg>
+ </div>
+   
+ <div class="paso-container" *ngIf="instructivos[pasoActual]" [@cambioPaso]="pasoActual">
+  <ion-icon [name]="instructivos[pasoActual].icono" class="icono" ></ion-icon>
+   <h2 class="titulo">{{ instructivos[pasoActual].titulo }}</h2>
+   <p class="descripcion">{{ instructivos[pasoActual].descripcion }}</p>
+</div>
+  <div class="botones-navegacion">
+    <ion-button fill="outline" (click)="anterior()" [disabled]="pasoActual===0">
+      Anterior
+    </ion-button>
+    <ion-button fill="outline" (click)="siguiente()" [disabled]="pasoActual===instructivos.length-1">
+      Siguiente
+    </ion-button>
+  </div>
+    <div class="indicadores">
+       <div
+      class="punto"
+      *ngFor="let instructivo of instructivos; let i = index"
+      [class.activo]="i === pasoActual"
+    ></div>
+    </div>
+</ion-content>

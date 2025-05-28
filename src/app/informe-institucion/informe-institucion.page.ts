@@ -1,24 +1,25 @@
 import { Component, OnInit,ViewChild,ElementRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonButton,IonBackButton,IonIcon,IonLabel,IonTextarea,IonSearchbar,IonList,IonItem,IonAvatar,IonCard,IonCardHeader,IonCardTitle,IonCardContent } from '@ionic/angular/standalone';
-import { chevronBackOutline, idCardOutline, mailOutline, personCircle, ribbonOutline } from 'ionicons/icons';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButtons,IonButton,IonBackButton,IonMenuButton,IonIcon,IonLabel,IonTextarea,IonSearchbar,IonList,IonItem,IonAvatar,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonMenu,IonApp } from '@ionic/angular/standalone';
+import { chevronBackOutline, documentAttachOutline, idCardOutline, mailOutline, personCircle, ribbonOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { loginInstitucionService } from '../services/InicioInstitucion';
 import { getService } from '../services/GetEstudiantesService';
 import { ModalEvaluacionComponent } from '../modal-evaluacion/modal-evaluacion.component';
 import {ModalController,IonicModule} from '@ionic/angular'
+import { ModalCartaComponent } from '../modal-carta/modal-carta.component';
 @Component({
   selector: 'app-informe-institucion',
   templateUrl: './informe-institucion.page.html',
   styleUrls: ['./informe-institucion.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButtons,IonButton,IonBackButton,IonIcon,IonLabel,IonTextarea,IonSearchbar,IonList,IonItem,IonAvatar,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonicModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonButtons,IonButton,IonBackButton,IonMenuButton,IonIcon,IonLabel,IonTextarea,IonSearchbar,IonList,IonItem,IonAvatar,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonicModule,IonApp,IonMenu]
 })
 export class InformeInstitucionPage implements OnInit {
 
   constructor(private inicioInstitucion:loginInstitucionService,private getSv:getService,private modalCtrl:ModalController) {
-    addIcons({chevronBackOutline,ribbonOutline,mailOutline,personCircle,idCardOutline})
+    addIcons({chevronBackOutline,ribbonOutline,mailOutline,personCircle,idCardOutline,documentAttachOutline})
    }
      Correo:string|null=''
     private institucion=this.inicioInstitucion.obtenerDatosLocalStorage()
@@ -130,5 +131,14 @@ export class InformeInstitucionPage implements OnInit {
 
         });
         await modal.present()
+   }
+
+   //Funcion para abrir el modal de generar carta
+   async cartaPDF(){
+    const modal=await this.modalCtrl.create({
+      component:ModalCartaComponent,
+      cssClass:'modal-carta-estilo'
+    })
+    await modal.present()
    }
 }

@@ -1,5 +1,23 @@
-<ion-header [translucent]="true">
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-toolbar class="header-toolbar">
+    <ion-header>
+      <ion-title>Menú de la Institución</ion-title>
+    </ion-header>
+    </ion-toolbar>
+    <ion-content>
+      <ion-button color="danger" fill="clear" size="small" (click)="cartaPDF()">
+        <ion-icon name="document-attach-outline"></ion-icon>
+          Generar Carta
+       </ion-button>
+    </ion-content>
+  </ion-menu>
+  <div class="main-content" id="main-content">
+  <ion-header [translucent]="true">
   <ion-toolbar class="header-toolbar">
+     <ion-buttons slot="end">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
     <ion-buttons>
       <ion-back-button defaultHref="login-institucion" text="volver" icon="chevron-back-outline"></ion-back-button>
     </ion-buttons>
@@ -100,3 +118,7 @@
       </div>
     </div>
 </ion-content>
+</div>
+</ion-app>
+
+

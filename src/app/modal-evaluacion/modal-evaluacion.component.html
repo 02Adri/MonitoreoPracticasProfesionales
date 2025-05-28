@@ -1,5 +1,6 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="header-toolbar">
+    <ion-icon name="stats-chart-outline" slot="start" class="icono"></ion-icon>
     Evaluar a {{estudiante.Estudiante?.Nombres_Apellidos || estudiante.Nombres_Apellidos}}
   <ion-buttons slot="end">
     <ion-button (click)="dismiss()">

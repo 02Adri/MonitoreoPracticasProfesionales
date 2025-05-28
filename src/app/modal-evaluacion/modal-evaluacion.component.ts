@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { text } from 'body-parser';
 import {IonHeader,IonToolbar,IonButtons,IonButton,IonContent,IonItem,IonLabel,IonTextarea,IonRange,IonIcon} from '@ionic/angular/standalone'
 import { addIcons } from 'ionicons';
-import { chevronBackOutline } from 'ionicons/icons';
+import { chevronBackOutline, statsChartOutline } from 'ionicons/icons';
 (pdfMake as any).vfs=(pdfFonts as any).vfs
 import { getService } from '../services/GetEstudiantesService';
 @Component({
@@ -32,7 +32,7 @@ export class ModalEvaluacionComponent  implements OnInit {
    observaciones:string=''
    chart:any
   constructor(private modalCtrl:ModalController,private getSv:getService) { 
-    addIcons({chevronBackOutline})
+    addIcons({chevronBackOutline,statsChartOutline})
   }
 
   ngOnInit() {
