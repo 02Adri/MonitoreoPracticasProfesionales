@@ -85,3 +85,8 @@ ion-button {
 .swal2-popup.custom-alert {
   border-radius: 12px !important;
 }
+ion-content .div_header ion-button.transparent-button {
+  --background: transparent;
+  --box-shadow: none;
+  color: white; // o el color del ícono que desees
+}

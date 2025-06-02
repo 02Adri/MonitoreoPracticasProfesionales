@@ -1,0 +1,21 @@
+<ion-header>
+  
+  <ion-toolbar color="primary">
+    <ion-icon name="map-outline" slot="start" class="icono"></ion-icon>
+    <ion-title>Geocalización de rutas</ion-title>
+     <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+
+     </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item line="none">
+    <ion-input placeholder="Nombre de la empresa" [(ngModel)]="empresa" ></ion-input>
+    <ion-button size="small" (click)="buscarEmpresa()">Buscar</ion-button>
+  </ion-item>
+    <div id="map" class="mapa-container"></div>
+ </ion-content>
